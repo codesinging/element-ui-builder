@@ -48,7 +48,7 @@ class ButtonGroup extends ElementUi
             $button = new Button();
         }
 
-        $this->content($button);
+        $this->add($button);
 
         return $button;
     }
