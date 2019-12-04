@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=7.0",
-        "codesinging/component-builder": "^1.0"
+        "codesinging/component-builder": "^1.1"
     },
     "autoload": {
         "psr-4": {
@@ -19,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CodeSinging\\ElementUiBuilder\\Tests": "tests"
+            "CodeSinging\\ElementUiBuilder\\Tests\\": "tests"
         }
     },
     "require-dev": {
