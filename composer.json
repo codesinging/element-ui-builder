@@ -1,0 +1,19 @@
+{
+    "name": "codesinging/element-ui-builder",
+    "description": "A package to build ElementUI component for PHP development",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codesinging",
+            "email": "codesinging@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeSinging\\ElementUiBuilder\\": "src"
+        }
+    }
+}
