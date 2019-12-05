@@ -58,14 +58,14 @@ class RadioGroup extends ElementUi
      * @param string|null $label
      * @param array       $props
      *
-     * @return Radio|RadioButton|mixed|string
+     * @return RadioButton
      */
     public function radioButton(string $label = null, array $props = [])
     {
         if ($label instanceof \Closure) {
             $radioButton = new RadioButton();
             $radioButton = call_user_func($label, $radioButton) ?? $radioButton;
-        } elseif ($label instanceof Radio) {
+        } elseif ($label instanceof RadioButton) {
             $radioButton = $label;
         } else {
             $radioButton = new RadioButton($label);
