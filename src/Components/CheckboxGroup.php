@@ -10,7 +10,7 @@ use CodeSinging\ElementUiBuilder\ElementUi;
 
 class CheckboxGroup extends ElementUi
 {
-    // Checkbox sizes
+    // CheckboxGroup sizes
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
     const SIZE_MINI = 'mini';
