@@ -10,6 +10,13 @@ use CodeSinging\ElementUiBuilder\ElementUi;
 
 class Badge extends ElementUi
 {
+    // Types
+    const TYPE_PRIMARY = 'primary';
+    const TYPE_SUCCESS = 'success';
+    const TYPE_WARNING = 'warning';
+    const TYPE_DANGER = 'danger';
+    const TYPE_INFO = 'info';
+
     /**
      * Badge constructor.
      *
