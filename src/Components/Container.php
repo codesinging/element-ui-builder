@@ -25,9 +25,9 @@ class Container extends ElementUi
     /**
      * Add a container.
      *
-     * @param array $props
+     * @param array|Closure|Container $props
      *
-     * @return $this|array|Container|mixed
+     * @return Container
      */
     public function container($props = [])
     {

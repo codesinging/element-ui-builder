@@ -37,13 +37,13 @@ class Carousel extends ElementUi
     /**
      * Add a CarouselItem.
      *
-     * @param string|null $name
+     * @param string|\Closure|CarouselItem|null $name
      * @param string|null $label
      * @param array       $props
      *
      * @return CarouselItem
      */
-    public function item(string $name = null, string $label = null, array $props = [])
+    public function item($name = null, string $label = null, array $props = [])
     {
         if ($name instanceof \Closure) {
             $item = new CarouselItem();

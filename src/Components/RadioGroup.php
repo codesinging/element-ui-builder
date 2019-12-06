@@ -31,12 +31,12 @@ class RadioGroup extends ElementUi
     /**
      * Add a Radio.
      *
-     * @param string|null $label
+     * @param string|\Closure|Radio|null $label
      * @param array       $props
      *
      * @return Radio
      */
-    public function radio(string $label = null, array $props = [])
+    public function radio($label = null, array $props = [])
     {
         if ($label instanceof \Closure) {
             $radio = new Radio();
@@ -55,12 +55,12 @@ class RadioGroup extends ElementUi
     /**
      * Add a RadioButton.
      *
-     * @param string|null $label
+     * @param string|\Closure|RadioButton|null $label
      * @param array       $props
      *
      * @return RadioButton
      */
-    public function radioButton(string $label = null, array $props = [])
+    public function radioButton($label = null, array $props = [])
     {
         if ($label instanceof \Closure) {
             $radioButton = new RadioButton();

@@ -26,13 +26,13 @@ class Timeline extends ElementUi
     /**
      * Add a TimelineItem.
      *
-     * @param string|null $timestamp
+     * @param string|\Closure|TimelineItem|null $timestamp
      * @param string|null $content
      * @param array       $props
      *
      * @return TimelineItem
      */
-    public function item(string $timestamp = null, string $content = null, array $props = [])
+    public function item($timestamp = null, string $content = null, array $props = [])
     {
         if ($timestamp instanceof \Closure) {
             $item = new TimelineItem();

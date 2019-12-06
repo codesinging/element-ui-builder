@@ -26,13 +26,13 @@ class Collapse extends ElementUi
     /**
      * Add a CollapseItem.
      *
-     * @param string|null $title
+     * @param string|\Closure|CollapseItem|null $title
      * @param string|null $name
      * @param array       $props
      *
      * @return CollapseItem
      */
-    public function item(string $title = null, string $name = null, array $props = [])
+    public function item($title = null, string $name = null, array $props = [])
     {
         if ($title instanceof \Closure) {
             $item = new CollapseItem();

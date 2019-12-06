@@ -26,7 +26,7 @@ class OptionGroup extends ElementUi
     /**
      * Add an Option.
      *
-     * @param string|int|float|array|null $value
+     * @param string|int|float|array|\Closure|Option|null $value
      * @param string|int|float|null       $label
      * @param array                       $props
      *

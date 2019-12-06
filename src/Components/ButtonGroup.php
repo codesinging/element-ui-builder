@@ -33,7 +33,7 @@ class ButtonGroup extends ElementUi
      * @param string|null                $type
      * @param array                      $props
      *
-     * @return Button|mixed|null
+     * @return Button
      */
     public function button($text = null, string $type = null, array $props = [])
     {

@@ -31,17 +31,17 @@ class CheckboxGroup extends ElementUi
     /**
      * Add a Checkbox.
      *
-     * @param string|null $label
+     * @param string|\Closure|Checkbox|null $label
      * @param array       $props
      *
      * @return Checkbox
      */
-    public function checkbox(string $label = null, array $props = [])
+    public function checkbox($label = null, array $props = [])
     {
         if ($label instanceof \Closure) {
             $checkbox = new Checkbox();
             $checkbox = call_user_func($label, $checkbox) ?? $checkbox;
-        } elseif ($label instanceof CheckboxButton) {
+        } elseif ($label instanceof Checkbox) {
             $checkbox = $label;
         } else {
             $checkbox = new Checkbox(null, $label);
@@ -55,7 +55,7 @@ class CheckboxGroup extends ElementUi
     /**
      * Add a CheckboxButton.
      *
-     * @param string|null $label
+     * @param string|\Closure|CheckboxButton|null $label
      * @param array       $props
      *
      * @return CheckboxButton

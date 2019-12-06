@@ -42,13 +42,13 @@ class Steps extends ElementUi
     /**
      * Add a Step.
      *
-     * @param string|null $title
+     * @param string|\Closure|Step|null $title
      * @param string|null $description
      * @param array       $props
      *
-     * @return Step|mixed|string
+     * @return Step
      */
-    public function step(string $title = null, string $description = null, array $props = [])
+    public function step($title = null, string $description = null, array $props = [])
     {
         if ($title instanceof \Closure) {
             $step = new Step();

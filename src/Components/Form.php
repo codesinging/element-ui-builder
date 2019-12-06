@@ -40,11 +40,11 @@ class Form extends ElementUi
     /**
      * Add a form item.
      *
-     * @param string|null $prop
+     * @param string|\Closure|FormItem|null $prop
      * @param string|null $label
      * @param array       $props
      *
-     * @return FormItem|mixed|string
+     * @return FormItem
      */
     public function item($prop = null, string $label = null, array $props = [])
     {
