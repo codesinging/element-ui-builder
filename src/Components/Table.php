@@ -98,7 +98,7 @@ class Table extends ElementUi
      *
      * @return TableColumn
      */
-    public function index(string $label = null, array $props = [])
+    public function index(string $label = '#', array $props = [])
     {
         return $this->column(null, $label)
             ->set($props)
