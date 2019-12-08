@@ -64,7 +64,7 @@ class Table extends ElementUi
         } elseif ($prop instanceof TableColumn) {
             $column = $prop;
         } else {
-            $column = new TableColumn($prop, $label, $props);
+            $column = new TableColumn($prop, $label ?? Str::studly($prop), $props);
         }
 
         $this->add($column);
