@@ -15,6 +15,11 @@ class Table extends ElementUi
 {
     use TableSetters;
 
+    // Sizes
+    const SIZE_MEDIUM = 'medium';
+    const SIZE_SMALL = 'small';
+    const SIZE_MINI = 'mini';
+
     /**
      * Table constructor.
      *

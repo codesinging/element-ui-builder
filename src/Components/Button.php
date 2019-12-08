@@ -13,12 +13,12 @@ class Button extends ElementUi
 {
     use ButtonSetters;
 
-    // The button sizes.
+    // Sizes.
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
     const SIZE_MINI = 'mini';
 
-    // The button types.
+    // Types.
     const TYPE_PRIMARY = 'primary';
     const TYPE_SUCCESS = 'success';
     const TYPE_WARNING = 'warning';
