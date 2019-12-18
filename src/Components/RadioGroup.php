@@ -32,19 +32,20 @@ class RadioGroup extends ElementUi
      * Add a Radio.
      *
      * @param string|\Closure|Radio|null $label
-     * @param array       $props
+     * @param string|null                $content
+     * @param array                      $props
      *
      * @return Radio
      */
-    public function radio($label = null, array $props = [])
+    public function radio($label = null, string $content = null, array $props = [])
     {
         if ($label instanceof \Closure) {
-            $radio = new Radio();
+            $radio = new Radio(null, null, $content, $props);
             $radio = call_user_func($label, $radio) ?? $radio;
         } elseif ($label instanceof Radio) {
-            $radio = $label;
+            $radio = $label->add($content)->set($props);
         } else {
-            $radio = new Radio(null, $label);
+            $radio = new Radio(null, $label, $content, $props);
         }
 
         $this->add($radio);
@@ -56,19 +57,20 @@ class RadioGroup extends ElementUi
      * Add a RadioButton.
      *
      * @param string|\Closure|RadioButton|null $label
-     * @param array       $props
+     * @param string|null                      $content
+     * @param array                            $props
      *
      * @return RadioButton
      */
-    public function radioButton($label = null, array $props = [])
+    public function radioButton($label = null, string $content = null, array $props = [])
     {
         if ($label instanceof \Closure) {
-            $radioButton = new RadioButton();
+            $radioButton = new RadioButton(null, $content, $props);
             $radioButton = call_user_func($label, $radioButton) ?? $radioButton;
         } elseif ($label instanceof RadioButton) {
-            $radioButton = $label;
+            $radioButton = $label->add($content)->set($props);
         } else {
-            $radioButton = new RadioButton($label);
+            $radioButton = new RadioButton($label, $content, $props);
         }
 
         $this->add($radioButton);

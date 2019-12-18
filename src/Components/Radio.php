@@ -20,12 +20,14 @@ class Radio extends ElementUi
      *
      * @param string|null                $model
      * @param null|string|int|float|bool $label
+     * @param string|null                $content
      * @param array                      $props
      */
-    public function __construct(string $model = null, $label = null, array $props = [])
+    public function __construct(string $model = null, $label = null, string $content=null, array $props = [])
     {
         parent::__construct($props);
         $model and $this->vModel($model);
         is_null($label) or $this->set('label', $label);
+        $this->add($content);
     }
 }
