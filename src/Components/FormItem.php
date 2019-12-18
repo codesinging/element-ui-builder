@@ -14,7 +14,7 @@ use CodeSinging\Helpers\Str;
 /**
  * Class FormItem
  *
- * @method FormItem radio(string $model = null, $label = null, array $props = [])
+ * @method FormItem radio(string $model = null, $label = null, string $content = null, array $props = [])
  * @method FormItem radioGroup($model, array $props = [])
  * @method FormItem input($model, array $props = [])
  * @method FormItem inputNumber($model, array $props = [])

@@ -17,6 +17,41 @@ class RadioGroupTest extends TestCase
         self::assertEquals('<el-radio-group v-model="sex">' . PHP_EOL . '</el-radio-group>', new RadioGroup('sex'));
     }
 
+    public function testOptions()
+    {
+        $group = new RadioGroup();
+        $group->options([
+            ['label' => 'female'],
+            ['label' => 'male'],
+        ]);
+
+        self::assertEquals(
+            '<el-radio-group>'
+            . PHP_EOL . '<el-radio label="female"></el-radio>'
+            . PHP_EOL . '<el-radio label="male"></el-radio>'
+            . PHP_EOL . '</el-radio-group>',
+            $group->build()
+        );
+    }
+
+    public function testIsButton()
+    {
+        $group = new RadioGroup();
+        $group->isButton();
+        $group->options([
+            ['label' => 'female'],
+            ['label' => 'male'],
+        ]);
+
+        self::assertEquals(
+            '<el-radio-group>'
+            . PHP_EOL . '<el-radio-button label="female"></el-radio-button>'
+            . PHP_EOL . '<el-radio-button label="male"></el-radio-button>'
+            . PHP_EOL . '</el-radio-group>',
+            $group->build()
+        );
+    }
+
     public function testRadio()
     {
         $group = new RadioGroup();

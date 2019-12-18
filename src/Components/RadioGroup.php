@@ -16,16 +16,56 @@ class RadioGroup extends ElementUi
     const SIZE_MINI = 'mini';
 
     /**
+     * Array of options.
+     * @var array
+     */
+    protected $options;
+
+    /**
+     * If the radio option is Button style.
+     * @var bool
+     */
+    protected $isButton = false;
+
+    /**
      * RadioGroup constructor.
      *
      * @param string|null $model
+     * @param array       $options
      * @param array       $props
      */
-    public function __construct(string $model = null, array $props = [])
+    public function __construct(string $model = null, array $options = [], array $props = [])
     {
         parent::__construct($props);
         $model and $this->vModel($model);
+        $this->options = $options;
         $this->eol()->glue();
+    }
+
+    /**
+     * Set options
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function options(array $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * Set isButton attribute.
+     *
+     * @param bool $isButton
+     *
+     * @return $this
+     */
+    public function isButton(bool $isButton = true)
+    {
+        $this->isButton = $isButton;
+        return $this;
     }
 
     /**
@@ -76,5 +116,20 @@ class RadioGroup extends ElementUi
         $this->add($radioButton);
 
         return $radioButton;
+    }
+
+    protected function __build()
+    {
+        $radios = [];
+        if ($this->options) {
+            foreach ($this->options as $option) {
+                if ($this->isButton) {
+                    $radios[] = new RadioButton($option['label'], $option['content'] ?? null);
+                } else {
+                    $radios[] = new Radio(null, $option['label'], $option['content'] ?? null);
+                }
+            }
+        }
+        $this->prepend($radios);
     }
 }
