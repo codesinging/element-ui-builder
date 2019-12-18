@@ -59,7 +59,7 @@ class TableTest extends TestCase
 
         self::assertEquals(
             '<el-table>'
-            . PHP_EOL . '<el-table-column type="index" align="center" width="60px"></el-table-column>'
+            . PHP_EOL . '<el-table-column label="#" type="index" align="center" width="60px"></el-table-column>'
             . PHP_EOL . '<el-table-column label="No" type="index" align="center" width="60px"></el-table-column>'
             . PHP_EOL . '</el-table>',
             $table->build()

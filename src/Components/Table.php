@@ -37,6 +37,8 @@ class Table extends ElementUi
      * Set data to the table.
      *
      * @param $data
+     *
+     * @return $this
      */
     public function data($data)
     {
@@ -45,6 +47,7 @@ class Table extends ElementUi
         } elseif (is_array($data)) {
             $this->set('data', $data);
         }
+        return $this;
     }
 
     /**
@@ -64,7 +67,7 @@ class Table extends ElementUi
         } elseif ($prop instanceof TableColumn) {
             $column = $prop;
         } else {
-            $column = new TableColumn($prop, $label ?? Str::studly($prop), $props);
+            $column = new TableColumn($prop, $label, $props);
         }
 
         $this->add($column);

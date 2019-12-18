@@ -19,6 +19,6 @@ class RadioButton extends ElementUi
     public function __construct(string $label = null, array $props = [])
     {
         parent::__construct($props);
-        $label and $this->set('label', $label);
+        is_null($label) or $this->set('label', $label);
     }
 }

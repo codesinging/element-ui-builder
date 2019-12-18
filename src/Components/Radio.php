@@ -26,6 +26,6 @@ class Radio extends ElementUi
     {
         parent::__construct($props);
         $model and $this->vModel($model);
-        $label and $this->set('label', $label);
+        is_null($label) or $this->set('label', $label);
     }
 }

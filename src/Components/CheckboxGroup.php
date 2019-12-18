@@ -32,19 +32,20 @@ class CheckboxGroup extends ElementUi
      * Add a Checkbox.
      *
      * @param string|\Closure|Checkbox|null $label
-     * @param array       $props
+     * @param string|null                   $content
+     * @param array                         $props
      *
      * @return Checkbox
      */
-    public function checkbox($label = null, array $props = [])
+    public function checkbox($label = null, string $content = null, array $props = [])
     {
         if ($label instanceof \Closure) {
-            $checkbox = new Checkbox();
+            $checkbox = new Checkbox(null, null, $content, $props);
             $checkbox = call_user_func($label, $checkbox) ?? $checkbox;
         } elseif ($label instanceof Checkbox) {
-            $checkbox = $label;
+            $checkbox = $label->add($content)->set($props);
         } else {
-            $checkbox = new Checkbox(null, $label);
+            $checkbox = new Checkbox(null, $label, $content, $props);
         }
 
         $this->add($checkbox);
@@ -56,19 +57,20 @@ class CheckboxGroup extends ElementUi
      * Add a CheckboxButton.
      *
      * @param string|\Closure|CheckboxButton|null $label
-     * @param array       $props
+     * @param string|null                         $content
+     * @param array                               $props
      *
      * @return CheckboxButton
      */
-    public function checkboxButton(string $label = null, array $props = [])
+    public function checkboxButton($label = null, string $content = null, array $props = [])
     {
         if ($label instanceof \Closure) {
-            $checkboxButton = new CheckboxButton();
+            $checkboxButton = new CheckboxButton(null, $content, $props);
             $checkboxButton = call_user_func($label, $checkboxButton) ?? $checkboxButton;
         } elseif ($label instanceof CheckboxButton) {
-            $checkboxButton = $label;
+            $checkboxButton = $label->add($content)->set($props);
         } else {
-            $checkboxButton = new CheckboxButton($label);
+            $checkboxButton = new CheckboxButton($label, $content, $props);
         }
 
         $this->add($checkboxButton);

@@ -18,14 +18,16 @@ class Checkbox extends ElementUi
     /**
      * Checkbox constructor.
      *
-     * @param string|null $model
-     * @param string|null $label
-     * @param array       $props
+     * @param string|null                $model
+     * @param string|int|float|bool|null $label
+     * @param string|null                $content
+     * @param array                      $props
      */
-    public function __construct(string $model = null, string $label = null, array $props = [])
+    public function __construct(string $model = null, string $label = null, string $content = null, array $props = [])
     {
         parent::__construct($props);
         $model and $this->vModel($model);
+        $this->add($content);
         is_null($label) or $this->set('label', $label);
     }
 }

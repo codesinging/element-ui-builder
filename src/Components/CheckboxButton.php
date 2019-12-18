@@ -13,12 +13,14 @@ class CheckboxButton extends ElementUi
     /**
      * CheckboxButton constructor.
      *
-     * @param null  $label
-     * @param array $props
+     * @param string|int|float|bool|null $label
+     * @param string|null                $content
+     * @param array                      $props
      */
-    public function __construct($label = null, array $props = [])
+    public function __construct($label = null, string $content = null, array $props = [])
     {
         parent::__construct($props);
+        $this->add($content);
         is_null($label) or $this->set('label', $label);
     }
 }
