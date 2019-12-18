@@ -38,7 +38,7 @@ class RadioGroup extends ElementUi
     {
         parent::__construct($props);
         $model and $this->vModel($model);
-        $this->options = $options;
+        $this->options($options);
         $this->eol()->glue();
     }
 
@@ -118,15 +118,18 @@ class RadioGroup extends ElementUi
         return $radioButton;
     }
 
+    /**
+     * Build options to Component and add them to content.
+     */
     protected function __build()
     {
         $radios = [];
         if ($this->options) {
             foreach ($this->options as $option) {
                 if ($this->isButton) {
-                    $radios[] = new RadioButton($option['label'], $option['content'] ?? null);
+                    $radios[] = new RadioButton($option['label'], $option['content'] ?? null, $option['props'] ?? []);
                 } else {
-                    $radios[] = new Radio(null, $option['label'], $option['content'] ?? null);
+                    $radios[] = new Radio(null, $option['label'], $option['content'] ?? null, $option['props'] ?? []);
                 }
             }
         }

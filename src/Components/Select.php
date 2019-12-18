@@ -17,16 +17,37 @@ class Select extends ElementUi
     const SIZE_MINI = 'mini';
 
     /**
+     * Array of options.
+     * @var array
+     */
+    protected $options;
+
+    /**
      * Select constructor.
      *
      * @param string|null $model
+     * @param array       $options
      * @param array       $props
      */
-    public function __construct(string $model = null, array $props = [])
+    public function __construct(string $model = null, array $options = [], array $props = [])
     {
         parent::__construct($props);
         $model and $this->vModel($model);
+        $this->options($options);
         $this->eol()->glue();
+    }
+
+    /**
+     * Set options
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function options(array $options)
+    {
+        $this->options = $options;
+        return $this;
     }
 
     /**
@@ -76,5 +97,19 @@ class Select extends ElementUi
         $this->add($optionGroup);
 
         return $optionGroup;
+    }
+
+    /**
+     * Build options to Component and add them to content.
+     */
+    protected function __build()
+    {
+        $options = [];
+        if ($this->options) {
+            foreach ($this->options as $option) {
+                $options[] = new Option($option['value'], $option['label'] ?? null, $option['props'] ?? []);
+            }
+        }
+        $this->prepend($options);
     }
 }

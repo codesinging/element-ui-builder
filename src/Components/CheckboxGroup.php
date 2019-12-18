@@ -16,16 +16,55 @@ class CheckboxGroup extends ElementUi
     const SIZE_MINI = 'mini';
 
     /**
+     * Array of options.
+     * @var array
+     */
+    protected $options;
+
+    /**
+     * If the checkbox option is Button style.
+     * @var bool
+     */
+    protected $isButton = false;
+
+    /**
      * CheckboxGroup constructor.
      *
      * @param string|null $model
      * @param array       $props
      */
-    public function __construct(string $model = null, array $props = [])
+    public function __construct(string $model = null, array $options=[], array $props = [])
     {
         parent::__construct($props);
         $model and $this->vModel($model);
+        $this->options($options);
         $this->glue()->eol();
+    }
+
+    /**
+     * Set options
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function options(array $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * Set isButton attribute.
+     *
+     * @param bool $isButton
+     *
+     * @return $this
+     */
+    public function isButton(bool $isButton = true)
+    {
+        $this->isButton = $isButton;
+        return $this;
     }
 
     /**
@@ -76,5 +115,23 @@ class CheckboxGroup extends ElementUi
         $this->add($checkboxButton);
 
         return $checkboxButton;
+    }
+
+    /**
+     * Build options to Component and add them to content.
+     */
+    protected function __build()
+    {
+        $checkboxes = [];
+        if ($this->options) {
+            foreach ($this->options as $option) {
+                if ($this->isButton) {
+                    $checkboxes[] = new CheckboxButton($option['label'], $option['content'] ?? null, $option['props'] ?? []);
+                } else {
+                    $checkboxes[] = new Checkbox(null, $option['label'], $option['content'] ?? null, $option['props'] ?? []);
+                }
+            }
+        }
+        $this->prepend($checkboxes);
     }
 }

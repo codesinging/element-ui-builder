@@ -17,6 +17,41 @@ class CheckboxGroupTest extends TestCase
         self::assertEquals('<el-checkbox-group v-model="checkedList">' . PHP_EOL . '</el-checkbox-group>', new CheckboxGroup('checkedList'));
     }
 
+    public function testOptions()
+    {
+        $group = new CheckboxGroup();
+        $group->options([
+            ['label' => 'book', 'props' => ['disabled']],
+            ['label' => 'pen'],
+        ]);
+
+        self::assertEquals(
+            '<el-checkbox-group>'
+            . PHP_EOL . '<el-checkbox disabled label="book"></el-checkbox>'
+            . PHP_EOL . '<el-checkbox label="pen"></el-checkbox>'
+            . PHP_EOL . '</el-checkbox-group>',
+            $group->build()
+        );
+    }
+
+    public function testIsButton()
+    {
+        $group = new CheckboxGroup();
+        $group->isButton();
+        $group->options([
+            ['label' => 'book'],
+            ['label' => 'pen'],
+        ]);
+
+        self::assertEquals(
+            '<el-checkbox-group>'
+            . PHP_EOL . '<el-checkbox-button label="book"></el-checkbox-button>'
+            . PHP_EOL . '<el-checkbox-button label="pen"></el-checkbox-button>'
+            . PHP_EOL . '</el-checkbox-group>',
+            $group->build()
+        );
+    }
+
     public function testCheckbox()
     {
         $group = new CheckboxGroup();

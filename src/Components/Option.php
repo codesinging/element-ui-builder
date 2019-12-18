@@ -20,7 +20,7 @@ class Option extends ElementUi
     public function __construct($value = null, $label = null, array $props = [])
     {
         parent::__construct($props);
-        $value and $this->set('value', $value);
-        $label and $this->set('label', $label);
+        is_null($value) or $this->set('value', $value);
+        is_null($label) or $this->set('label', $label);
     }
 }

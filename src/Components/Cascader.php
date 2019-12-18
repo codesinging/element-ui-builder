@@ -19,11 +19,13 @@ class Cascader extends ElementUi
      * Cascader constructor.
      *
      * @param string|null $model
+     * @param string|null $options
      * @param array       $props
      */
-    public function __construct(string $model=null, array $props = [])
+    public function __construct(string $model = null, string $options = null, array $props = [])
     {
         parent::__construct($props);
+        $options and $this->bind('options', $options);
         $model and $this->vModel($model);
     }
 }

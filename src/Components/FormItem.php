@@ -15,9 +15,28 @@ use CodeSinging\Helpers\Str;
  * Class FormItem
  *
  * @method FormItem radio(string $model = null, $label = null, string $content = null, array $props = [])
- * @method FormItem radioGroup($model, array $props = [])
+ * @method FormItem radioGroup($model, array $options = [], array $props = [])
+ * @method FormItem checkbox(string $model = null, $label = null, string $content = null, array $props = [])
+ * @method FormItem checkboxGroup($model, array $options = [], array $props = [])
  * @method FormItem input($model, array $props = [])
  * @method FormItem inputNumber($model, array $props = [])
+ * @method FormItem select($model, array $options = [], array $props = [])
+ * @method FormItem cascader($model, string $options = null, array $props = [])
+ * @method FormItem switcher($model, array $props = [])
+ * @method FormItem slider($model, array $props = [])
+ * @method FormItem datePicker($model, array $props = [])
+ * @method FormItem dateTimePicker($model, array $props = [])
+ * @method FormItem datesPicker($model, array $props = [])
+ * @method FormItem dateRangePicker($model, array $props = [])
+ * @method FormItem dateTimeRangePicker($model, array $props = [])
+ * @method FormItem weekPicker($model, array $props = [])
+ * @method FormItem monthPicker($model, array $props = [])
+ * @method FormItem yearPicker($model, array $props = [])
+ * @method FormItem timeSelect($model, array $props = [])
+ * @method FormItem timePicker($model, array $props = [])
+ * @method FormItem rate($model, array $props = [])
+ * @method FormItem colorPicker($model, array $props = [])
+ * @method FormItem transfer($model, string $data = null, array $props = [])
  *
  * @package CodeSinging\ElementUiBuilder\Components
  */

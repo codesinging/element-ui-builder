@@ -18,6 +18,23 @@ class SelectTest extends TestCase
         self::assertEquals('<el-select v-model="data">' . PHP_EOL . '</el-select>', new Select('data'));
     }
 
+    public function testOptions()
+    {
+        $select = new Select();
+        $select->options([
+            ['value' => 'beijing', 'label' => 'Beijing'],
+            ['value' => 'shanghai', 'label' => 'Shanghai'],
+        ]);
+
+        self::assertEquals(
+            '<el-select>'
+            . PHP_EOL . '<el-option value="beijing" label="Beijing"></el-option>'
+            . PHP_EOL . '<el-option value="shanghai" label="Shanghai"></el-option>'
+            . PHP_EOL . '</el-select>',
+            $select->build()
+        );
+    }
+
     public function testOption()
     {
         $select = new Select();
