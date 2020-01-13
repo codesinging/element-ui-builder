@@ -6,19 +6,33 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class DropdownItem extends ElementUi
+/**
+ * Class DropdownItem
+ *
+ * @method $this command(string|int|array $command, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this divided(bool $divided = true, $store = null)
+ * @method $this icon(string $icon, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class DropdownItem extends Component
 {
     /**
      * DropdownItem constructor.
      *
-     * @param string|null $text
-     * @param array       $props
+     * @param string|array|null $text
+     * @param array             $attributes
      */
-    public function __construct(string $text = null, array $props = [])
+    public function __construct($text = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $text and $this->add($text);
+        if (is_array($text)) {
+            parent::__construct($text);
+        } else {
+            parent::__construct($attributes);
+            $text and $this->add($text);
+        }
     }
 }

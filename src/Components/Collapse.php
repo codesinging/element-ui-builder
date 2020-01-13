@@ -6,35 +6,47 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use Closure;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Collapse extends ElementUi
+/**
+ * Class Collapse
+ *
+ * @method $this accordion(bool $accordion = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Collapse extends Component
 {
     /**
      * Collapse constructor.
      *
-     * @param string|null $model
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $attributes
      */
-    public function __construct(string $model = null, array $props = [])
+    public function __construct($model = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        $this->eol()->glue();
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+            $this->lineBreak()->glue();
+        }
     }
 
     /**
      * Add a CollapseItem.
      *
-     * @param string|\Closure|CollapseItem|null $title
-     * @param string|null $name
-     * @param array       $props
+     * @param string|array|Closure|CollapseItem|null $title
+     * @param string|null                            $name
+     * @param array                                  $props
      *
      * @return CollapseItem
      */
     public function item($title = null, string $name = null, array $props = [])
     {
-        if ($title instanceof \Closure) {
+        if ($title instanceof Closure) {
             $item = new CollapseItem();
             $item = call_user_func($title, $item) ?? $item;
         } elseif ($title instanceof CollapseItem) {

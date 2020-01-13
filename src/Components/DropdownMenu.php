@@ -6,32 +6,33 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use Closure;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class DropdownMenu extends ElementUi
+class DropdownMenu extends Component
 {
     /**
      * DropdownMenu constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 
     /**
      * Add a DropdownItem.
      *
-     * @param string|\Closure|DropdownItem|null  $text
-     * @param array $props
+     * @param string|array|Closure|DropdownItem|null $text
+     * @param array                            $props
      *
      * @return DropdownItem
      */
     public function item($text = null, array $props = [])
     {
-        if ($text instanceof \Closure) {
+        if ($text instanceof Closure) {
             $item = new DropdownItem();
             $item = call_user_func($text, $item) ?? $item;
         } elseif ($text instanceof DropdownItem) {

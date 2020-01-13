@@ -14,6 +14,6 @@ class HeaderTest extends TestCase
     public function testBuild()
     {
         self::assertEquals('<el-header>' . PHP_EOL . '</el-header>', new Header());
-        self::assertEquals('<el-header height="60px">' . PHP_EOL . '</el-header>', new Header('60px'));
+        self::assertEquals('<el-header height="60px">' . PHP_EOL . '</el-header>', (string)new Header('60px'));
     }
 }

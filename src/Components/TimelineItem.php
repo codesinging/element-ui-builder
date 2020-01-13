@@ -6,9 +6,22 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class TimelineItem extends ElementUi
+/**
+ * Class TimelineItem
+ *
+ * @method $this timestamp(string $timestamp, $store = null)
+ * @method $this hideTimestamp(bool $hideTimestamp = true, $store = null)
+ * @method $this placeholder(string $placeholder, $store = null)
+ * @method $this type(string $type, $store = null)
+ * @method $this color(string $color, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this icon(string $icon, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class TimelineItem extends Component
 {
     // Placements
     const PLACEMENT_TOP = 'top';
@@ -28,14 +41,18 @@ class TimelineItem extends ElementUi
     /**
      * TimelineItem constructor.
      *
-     * @param string|null $timestamp
-     * @param string|null $content
-     * @param array       $props
+     * @param string|array|null $timestamp
+     * @param string|null       $content
+     * @param array             $attributes
      */
-    public function __construct(string $timestamp=null, string $content=null, array $props = [])
+    public function __construct($timestamp = null, string $content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $timestamp and $this->set('timestamp', $timestamp);
-        $content and $this->add($content);
+        if (is_array($timestamp)) {
+            parent::__construct($timestamp);
+        } else {
+            parent::__construct($attributes);
+            $timestamp and $this->set('timestamp', $timestamp);
+            $content and $this->add($content);
+        }
     }
 }

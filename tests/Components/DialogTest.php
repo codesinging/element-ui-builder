@@ -15,6 +15,6 @@ class DialogTest extends TestCase
     {
         self::assertEquals('<el-dialog>' . PHP_EOL . '</el-dialog>', new Dialog());
         self::assertEquals('<el-dialog title="Title">' . PHP_EOL . '</el-dialog>', new Dialog('Title'));
-        self::assertEquals('<el-dialog title="Title">' .PHP_EOL . 'Content' . PHP_EOL . '</el-dialog>', new Dialog('Title', 'Content'));
+        self::assertEquals('<el-dialog title="Title" :visible.sync="visible">' . PHP_EOL . '</el-dialog>', new Dialog('Title', 'visible'));
     }
 }

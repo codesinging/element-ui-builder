@@ -6,36 +6,34 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\RowSetters;
+use Closure;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Row extends ElementUi
+class Row extends Component
 {
-    use RowSetters;
-
     /**
      * Row constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 
     /**
      * Add a col.
      *
-     * @param string|int|\Closure|Col $span
-     * @param int                     $offset
-     * @param array                   $props
+     * @param string|int|array|Closure|Col $span
+     * @param int                          $offset
+     * @param array                        $props
      *
      * @return Col
      */
     public function col($span, int $offset = 0, array $props = [])
     {
-        if ($span instanceof \Closure) {
+        if ($span instanceof Closure) {
             $col = new Col();
             $col = call_user_func($span, $col) ?? $col;
         } elseif ($span instanceof Col) {
@@ -44,7 +42,7 @@ class Row extends ElementUi
             $col = new Col($span, $offset, $props);
         }
 
-        $this->content($col);
+        $this->add($col);
 
         return $col;
     }

@@ -6,13 +6,30 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\FormSetters;
+use Closure;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Form extends ElementUi
+/**
+ * Class Form
+ *
+ * @method $this model(array $model, $store = null)
+ * @method $this rules(array $rules, $store = null)
+ * @method $this inline(bool $inline = true, $store = null)
+ * @method $this labelPosition(string $labelPosition, $store = null)
+ * @method $this labelWidth(string $labelWidth, $store = null)
+ * @method $this labelSuffix(string $labelSuffix, $store = null)
+ * @method $this hideRequiredAsterisk(bool $hideRequiredAsterisk = true, $store = null)
+ * @method $this showMessage(bool $showMessage = true, $store = null)
+ * @method $this inlineMessage(bool $inlineMessage = true, $store = null)
+ * @method $this statusIcon(bool $statusIcon = true, $store = null)
+ * @method $this validateOnRuleChange(bool $validateOnRuleChange = true, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Form extends Component
 {
-    use FormSetters;
-
     // The label positions.
     const LABEL_POSITION_LEFT = 'left';
     const LABEL_POSITION_RIGHT = 'right';
@@ -26,37 +43,39 @@ class Form extends ElementUi
     /**
      * Form constructor.
      *
-     * @param string|null $model
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $attributes
      */
-    public function __construct(string $model = null, array $props = [])
+    public function __construct($model = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->set('model', '', $model);
-        $this->eol();
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->set(':model', $model);
+        }
+        $this->lineBreak();
         $this->glue();
     }
 
     /**
      * Add a form item.
      *
-     * @param string|\Closure|FormItem|null $prop
-     * @param string|null $label
-     * @param array       $props
+     * @param string|array|Closure|FormItem|null $prop
+     * @param string|null                        $label
+     * @param array                              $attributes
      *
      * @return FormItem
      */
-    public function item($prop = null, string $label = null, array $props = [])
+    public function item($prop = null, string $label = null, array $attributes = [])
     {
-        if (is_string($prop)) {
-            $item = new FormItem($prop, $label, $props);
-        } elseif ($prop instanceof \Closure) {
+        if ($prop instanceof Closure) {
             $item = new FormItem();
             $item = call_user_func($prop, $item) ?? $item;
         } elseif ($prop instanceof FormItem) {
             $item = $prop;
         } else {
-            $item = new FormItem();
+            $item = new FormItem($prop, $label, $attributes);
         }
 
         $this->add($item);

@@ -6,13 +6,26 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\ButtonSetters;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Button extends ElementUi
+/**
+ * Class Button
+ *
+ * @method $this size(string $size, $store = null)
+ * @method $this type(string $type, $store = null)
+ * @method $this plain(bool $plain = true, $store = null)
+ * @method $this round(bool $round = true, $store = null)
+ * @method $this circle(bool $circle = true, $store = null)
+ * @method $this loading(bool $loading = true, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this icon(string $icon, $store = null)
+ * @method $this autofocus(bool $autofocus = true, $store = null)
+ * @method $this nativeType(string $nativeType, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Button extends Component
 {
-    use ButtonSetters;
-
     // Sizes.
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
@@ -31,12 +44,16 @@ class Button extends ElementUi
      *
      * @param string|null $text
      * @param string|null $type
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $text=null, string $type=null, array $props = [])
+    public function __construct( $text=null, string $type=null, array $attributes = [])
     {
-        parent::__construct($props);
-        $text and $this->content($text);
-        $type and $this->set('type', $type);
+        if (is_array($text)){
+            parent::__construct($text);
+        } else {
+            parent::__construct($attributes);
+            $text and $this->add($text);
+            $type and $this->set('type', $type);
+        }
     }
 }

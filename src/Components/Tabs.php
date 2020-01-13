@@ -6,9 +6,22 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Tabs extends ElementUi
+/**
+ * Class Tabs
+ *
+ * @method $this type(string $type, $store = null)
+ * @method $this closable(bool $closable = true, $store = null)
+ * @method $this addable(bool $addable = true, $store = null)
+ * @method $this editable(bool $editable = true, $store = null)
+ * @method $this tabPosition(string $tabPosition, $store = null)
+ * @method $this stretch(bool $stretch = true, $store = null)
+ * @method $this beforeLeave(string $beforeLeave, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Tabs extends Component
 {
     // Types
     const TYPE_CARD = 'card';
@@ -24,13 +37,18 @@ class Tabs extends ElementUi
      * Tabs constructor.
      *
      * @param string|null $model
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $model = null, array $props = [])
+    public function __construct($model = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        $this->eol()->glue();
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+        }
+
+        $this->lineBreak()->glue();
     }
 
     /**

@@ -13,8 +13,8 @@ class ColTest extends TestCase
 {
     public function testBuild()
     {
-        self::assertEquals('<el-col></el-col>', (new Col())->build());
-        self::assertEquals('<el-col :span="12"></el-col>', (new Col(12))->build());
-        self::assertEquals('<el-col :span="12" :offset="3"></el-col>', (new Col(12, 3))->build());
+        self::assertEquals('<el-col></el-col>', (new Col()));
+        self::assertEquals('<el-col :span="12"></el-col>', (new Col(12)));
+        self::assertEquals('<el-col :span="12" :offset="3"></el-col>', (new Col(12, 3)));
     }
 }

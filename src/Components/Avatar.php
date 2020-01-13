@@ -6,9 +6,22 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Avatar extends ElementUi
+/**
+ * Class Avatar
+ *
+ * @method $this icon(string $icon, $store = null)
+ * @method $this size(string|int $size)
+ * @method $this shape(string $shape)
+ * @method $this src(string $src)
+ * @method $this srcSet(string $srcSet, $store = null)
+ * @method $this alt(string $alt, $store = null)
+ * @method $this fit(string $fit, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Avatar extends Component
 {
     // Sizes
     const SIZE_LARGE = 'large';
@@ -29,10 +42,10 @@ class Avatar extends ElementUi
     /**
      * Avatar constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
+        parent::__construct($attributes);
     }
 }

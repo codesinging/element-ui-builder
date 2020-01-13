@@ -27,7 +27,7 @@ class TimelineTest extends TestCase
             . PHP_EOL . '<el-timeline-item></el-timeline-item>'
             . PHP_EOL . '<el-timeline-item></el-timeline-item>'
             . PHP_EOL . '</el-timeline>',
-            $timeline->build()
+            $timeline
         );
     }
 }

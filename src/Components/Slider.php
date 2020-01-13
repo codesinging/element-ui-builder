@@ -6,9 +6,32 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Slider extends ElementUi
+/**
+ * Class Slider
+ *
+ * @method $this min(int $min, $store = null)
+ * @method $this max(int $max, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this step(int $step, $store = null)
+ * @method $this showInput(bool $showInput = true, $store = null)
+ * @method $this showInputControls(bool $showInputControls = true, $store = null)
+ * @method $this inputSize(string $inputSize, $store = null)
+ * @method $this showStops(bool $showStops = true, $store = null)
+ * @method $this showTooltip(bool $showTooltip = true, $store = null)
+ * @method $this formatTooltip(string $formatTooltip, $store = null)
+ * @method $this range(bool $range = true, $store = null)
+ * @method $this vertical(bool $vertical = true, $store = null)
+ * @method $this height(string $height, $store = null)
+ * @method $this label(string $label, $store = null)
+ * @method $this debounce(int $debounce, $store = null)
+ * @method $this tooltipClass(string $tooltipClass, $store = null)
+ * @method $this marks(array $marks, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Slider extends Component
 {
     // Input sizes
     const INPUT_SIZE_MEDIUM = 'medium';
@@ -18,12 +41,16 @@ class Slider extends ElementUi
     /**
      * Slider constructor.
      *
-     * @param string|null $model
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $attributes
      */
-    public function __construct(string $model=null, array $props = [])
+    public function __construct($model = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+        }
     }
 }

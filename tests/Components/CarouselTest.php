@@ -27,7 +27,7 @@ class CarouselTest extends TestCase
             . PHP_EOL . '<el-carousel-item></el-carousel-item>'
             . PHP_EOL . '<el-carousel-item></el-carousel-item>'
             . PHP_EOL . '</el-carousel>',
-            $carousel->build()
+            $carousel
         );
     }
 }

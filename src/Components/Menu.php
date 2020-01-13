@@ -6,12 +6,29 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 use CodeSinging\ElementUiBuilder\Methods\MenuItemGroupMethod;
 use CodeSinging\ElementUiBuilder\Methods\MenuItemMethod;
 use CodeSinging\ElementUiBuilder\Methods\SubmenuMethod;
 
-class Menu extends ElementUi
+/**
+ * Class Menu
+ *
+ * @method $this mode(string $mode, $store = null)
+ * @method $this collapse(bool $collapse = true, $store = null)
+ * @method $this backgroundColor(string $backgroundColor, $store = null)
+ * @method $this textColor(string $textColor, $store = null)
+ * @method $this activeTextColor(string $activeTextColor, $store = null)
+ * @method $this defaultActive(string $defaultActive, $store = null)
+ * @method $this defaultOpeneds(array $defaultOpeneds, $store = null)
+ * @method $this uniqueOpened(bool $uniqueOpened = true, $store = null)
+ * @method $this menuTrigger(string $menuTrigger, $store = null)
+ * @method $this router(bool $router = true, $store = null)
+ * @method $this collapseTransition(bool $collapseTransition = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Menu extends Component
 {
     use MenuItemMethod;
     use SubmenuMethod;
@@ -28,11 +45,11 @@ class Menu extends ElementUi
     /**
      * Menu constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 }

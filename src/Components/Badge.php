@@ -6,9 +6,20 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Badge extends ElementUi
+/**
+ * Class Badge
+ *
+ * @method $this value(string|int $value, $store = null)
+ * @method $this max(int $max, $store = null)
+ * @method $this isDot(bool $isDot = true, $store = null)
+ * @method $this hidden(bool $hidden = true, $store = null)
+ * @method $this type(string $type, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Badge extends Component
 {
     // Types
     const TYPE_PRIMARY = 'primary';
@@ -20,12 +31,16 @@ class Badge extends ElementUi
     /**
      * Badge constructor.
      *
-     * @param null  $value
-     * @param array $props
+     * @param string|int|array|null $value
+     * @param array                 $attributes
      */
-    public function __construct($value=null, array $props = [])
+    public function __construct($value = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $value and $this->bind('value', $value);
+        if (is_array($value)) {
+            parent::__construct($value);
+        } else {
+            parent::__construct($attributes);
+            is_null($value) or $this->set('value', $value);
+        }
     }
 }

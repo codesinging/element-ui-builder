@@ -14,6 +14,6 @@ class OptionTest extends TestCase
     public function testBuild()
     {
         self::assertEquals('<el-option></el-option>', new Option());
-        self::assertEquals('<el-option value="1" label="female"></el-option>', new Option(1, 'female'));
+        self::assertEquals('<el-option :value="1" label="female"></el-option>', (string)new Option(1, 'female'));
     }
 }

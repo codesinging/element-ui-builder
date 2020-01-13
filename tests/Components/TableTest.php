@@ -14,7 +14,7 @@ class TableTest extends TestCase
 {
     public function testBuild()
     {
-        self::assertEquals('<el-table>' . PHP_EOL . '</el-table>', Table::instance()->build());
+        self::assertEquals('<el-table>' . PHP_EOL . '</el-table>', Table::instance());
     }
 
     public function testColumn()
@@ -34,7 +34,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column prop="age"></el-table-column>'
             . PHP_EOL . '<el-table-column prop="sex"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -47,7 +47,7 @@ class TableTest extends TestCase
             '<el-table>'
             . PHP_EOL . '<el-table-column type="selection" align="center" width="60px"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -62,7 +62,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column label="#" type="index" align="center" width="60px"></el-table-column>'
             . PHP_EOL . '<el-table-column label="No" type="index" align="center" width="60px"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -75,7 +75,7 @@ class TableTest extends TestCase
             '<el-table>'
             . PHP_EOL . '<el-table-column type="expand" align="center" width="60px"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -90,7 +90,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column prop="id" label="Id" align="center" width="80px"></el-table-column>'
             . PHP_EOL . '<el-table-column prop="id" label="序号" align="center" width="80px"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -105,7 +105,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column prop="name" label="名称"></el-table-column>'
             . PHP_EOL . '<el-table-column prop="name" label="姓名"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -120,7 +120,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column prop="create_time" label="创建时间" align="center"></el-table-column>'
             . PHP_EOL . '<el-table-column prop="create_time" label="成立日期" align="center"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -135,7 +135,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column prop="update_time" label="更新时间" align="center"></el-table-column>'
             . PHP_EOL . '<el-table-column prop="update_time" label="修改日期" align="center"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 
@@ -150,7 +150,7 @@ class TableTest extends TestCase
             . PHP_EOL . '<el-table-column prop="age" label="Age"></el-table-column>'
             . PHP_EOL . '<el-table-column prop="sex" label="性别"></el-table-column>'
             . PHP_EOL . '</el-table>',
-            $table->build()
+            $table
         );
     }
 

@@ -6,39 +6,48 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use Closure;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Breadcrumb extends ElementUi
+/**
+ * Class Breadcrumb
+ *
+ * @method $this separator(string $separator, $store = null)
+ * @method $this separatorClass(string $separatorClass, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Breadcrumb extends Component
 {
     /**
      * Breadcrumb constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 
     /**
      * Add a BreadcrumbItem
      *
-     * @param string|\Closure|BreadcrumbItem|null $text
-     * @param string|null                         $url
-     * @param array                               $props
+     * @param string|Closure|BreadcrumbItem|null $text
+     * @param string|null                        $url
+     * @param array                              $attributes
      *
-     * @return BreadcrumbItem|mixed|null
+     * @return BreadcrumbItem
      */
-    public function item($text = null, string $url = null, array $props = [])
+    public function item($text = null, string $url = null, array $attributes = [])
     {
-        if ($text instanceof \Closure) {
+        if ($text instanceof Closure) {
             $item = new BreadcrumbItem();
             $item = call_user_func($text, $item) ?? $item;
         } elseif ($text instanceof BreadcrumbItem) {
             $item = $text;
         } else {
-            $item = new BreadcrumbItem($text, $url, $props);
+            $item = new BreadcrumbItem($text, $url, $attributes);
         }
 
         $this->add($item);

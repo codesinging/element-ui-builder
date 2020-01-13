@@ -6,9 +6,20 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Radio extends ElementUi
+/**
+ * Class Radio
+ *
+ * @method $this label(string|int|bool $label, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this border(bool $border = true, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this name(string $name, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Radio extends Component
 {
     // Radio sizes
     const SIZE_MEDIUM = 'medium';
@@ -18,16 +29,20 @@ class Radio extends ElementUi
     /**
      * Radio constructor.
      *
-     * @param string|null                $model
+     * @param string|array|null          $model
      * @param null|string|int|float|bool $label
      * @param string|null                $content
-     * @param array                      $props
+     * @param array                      $attributes
      */
-    public function __construct(string $model = null, $label = null, string $content=null, array $props = [])
+    public function __construct($model = null, $label = null, string $content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        is_null($label) or $this->set('label', $label);
-        $this->add($content);
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+            is_null($label) or $this->set('label', $label);
+            $this->add($content);
+        }
     }
 }

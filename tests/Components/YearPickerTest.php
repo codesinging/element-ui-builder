@@ -13,6 +13,6 @@ class YearPickerTest extends TestCase
 {
     public function testBuild()
     {
-        self::assertEquals('<el-date-picker type="year"></el-date-picker>', new YearPicker());
+        self::assertEquals('<el-date-picker type="year"></el-date-picker>', (string)new YearPicker());
     }
 }

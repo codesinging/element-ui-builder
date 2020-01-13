@@ -6,9 +6,20 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class TimeSelect extends ElementUi
+/**
+ * Class TimeSelect
+ *
+ * @method $this start(string $start, $store = null)
+ * @method $this end(string $end, $store = null)
+ * @method $this step(string $step, $store = null)
+ * @method $this minTime(string $minTime, $store = null)
+ * @method $this maxTime(string $maxTime, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class TimeSelect extends Component
 {
     // Sizes
     const SIZE_MEDIUM = 'medium';
@@ -18,12 +29,16 @@ class TimeSelect extends ElementUi
     /**
      * TimeSelect constructor.
      *
-     * @param string|null $model
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $attributes
      */
-    public function __construct(string $model=null, array $props = [])
+    public function __construct($model = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+        }
     }
 }

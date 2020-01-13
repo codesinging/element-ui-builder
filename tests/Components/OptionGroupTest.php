@@ -29,7 +29,7 @@ class OptionGroupTest extends TestCase
             . PHP_EOL . '<el-option value="shanghai" label="Shanghai"></el-option>'
             . PHP_EOL . '<el-option value="beijing" label="Beijing"></el-option>'
             . PHP_EOL . '</el-option-group>',
-            $group->build()
+            $group
         );
     }
 }

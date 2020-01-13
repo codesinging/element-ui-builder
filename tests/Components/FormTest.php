@@ -15,7 +15,7 @@ class FormTest extends TestCase
     public function testBuild()
     {
         self::assertEquals('<el-form>' . PHP_EOL . '</el-form>', Form::instance());
-        self::assertEquals('<el-form :model="data">' . PHP_EOL . '</el-form>', Form::instance('data'));
+        self::assertEquals('<el-form :model="data">' . PHP_EOL . '</el-form>', (string)new Form('data'));
     }
 
     public function testItem()
@@ -37,7 +37,7 @@ class FormTest extends TestCase
             . PHP_EOL . '<el-form-item label="age"></el-form-item>'
             . PHP_EOL . '<el-form-item prop="id"></el-form-item>'
             . PHP_EOL . '</el-form>',
-            $form->build()
+            $form
         );
     }
 }

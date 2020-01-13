@@ -6,21 +6,34 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Option extends ElementUi
+/**
+ * Class Option
+ *
+ * @method $this value(string|int|array $value, $store = null)
+ * @method $this label(string|int $label, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Option extends Component
 {
     /**
      * Option constructor.
      *
      * @param string|int|float|array|null $value
      * @param string|int|float|null       $label
-     * @param array                       $props
+     * @param array                       $attributes
      */
-    public function __construct($value = null, $label = null, array $props = [])
+    public function __construct($value = null, $label = null, array $attributes = [])
     {
-        parent::__construct($props);
-        is_null($value) or $this->set('value', $value);
-        is_null($label) or $this->set('label', $label);
+        if (is_array($value)) {
+            parent::__construct($value);
+        } else {
+            parent::__construct($attributes);
+            is_null($value) or $this->set('value', $value);
+            is_null($label) or $this->set('label', $label);
+        }
     }
 }

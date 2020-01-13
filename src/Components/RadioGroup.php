@@ -6,9 +6,19 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class RadioGroup extends ElementUi
+/**
+ * Class RadioGroup
+ *
+ * @method $this size(string $size, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this textColor(string $textColor, $store = null)
+ * @method $this fill(string $fill, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class RadioGroup extends Component
 {
     // Radio sizes
     const SIZE_MEDIUM = 'medium';
@@ -30,16 +40,20 @@ class RadioGroup extends ElementUi
     /**
      * RadioGroup constructor.
      *
-     * @param string|null $model
-     * @param array       $options
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $options
+     * @param array             $attributes
      */
-    public function __construct(string $model = null, array $options = [], array $props = [])
+    public function __construct($model = null, array $options = [], array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        $this->options($options);
-        $this->eol()->glue();
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+            $this->options($options);
+        }
+        $this->lineBreak()->glue();
     }
 
     /**
@@ -73,19 +87,19 @@ class RadioGroup extends ElementUi
      *
      * @param string|\Closure|Radio|null $label
      * @param string|null                $content
-     * @param array                      $props
+     * @param array                      $attributes
      *
      * @return Radio
      */
-    public function radio($label = null, string $content = null, array $props = [])
+    public function radio($label = null, string $content = null, array $attributes = [])
     {
         if ($label instanceof \Closure) {
-            $radio = new Radio(null, null, $content, $props);
+            $radio = new Radio(null, null, $content, $attributes);
             $radio = call_user_func($label, $radio) ?? $radio;
         } elseif ($label instanceof Radio) {
-            $radio = $label->add($content)->set($props);
+            $radio = $label->add($content)->set($attributes);
         } else {
-            $radio = new Radio(null, $label, $content, $props);
+            $radio = new Radio(null, $label, $content, $attributes);
         }
 
         $this->add($radio);
@@ -98,19 +112,19 @@ class RadioGroup extends ElementUi
      *
      * @param string|\Closure|RadioButton|null $label
      * @param string|null                      $content
-     * @param array                            $props
+     * @param array                            $attributes
      *
      * @return RadioButton
      */
-    public function radioButton($label = null, string $content = null, array $props = [])
+    public function radioButton($label = null, string $content = null, array $attributes = [])
     {
         if ($label instanceof \Closure) {
-            $radioButton = new RadioButton(null, $content, $props);
+            $radioButton = new RadioButton(null, $content, $attributes);
             $radioButton = call_user_func($label, $radioButton) ?? $radioButton;
         } elseif ($label instanceof RadioButton) {
-            $radioButton = $label->add($content)->set($props);
+            $radioButton = $label->add($content)->set($attributes);
         } else {
-            $radioButton = new RadioButton($label, $content, $props);
+            $radioButton = new RadioButton($label, $content, $attributes);
         }
 
         $this->add($radioButton);

@@ -8,7 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Components;
 
 class MonthRangePicker extends DatePicker
 {
-    protected $props = [
+    protected $attributes = [
         'type' => 'monthrange',
     ];
 

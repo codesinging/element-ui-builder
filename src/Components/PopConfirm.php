@@ -6,21 +6,39 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class PopConfirm extends ElementUi
+/**
+ * Class PopConfirm
+ *
+ * @method $this title(string $title, $store = null)
+ * @method $this confirmButtonText(string $confirmButtonText, $store = null)
+ * @method $this cancelButtonText(string $cancelButtonText, $store = null)
+ * @method $this confirmButtonType(string $confirmButtonType, $store = null)
+ * @method $this cancelButtonType(string $cancelButtonType, $store = null)
+ * @method $this icon(string $icon, $store = null)
+ * @method $this iconColor(string $iconColor, $store = null)
+ * @method $this hideIcon(bool $hideIcon = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class PopConfirm extends Component
 {
     protected $baseTag = 'popconfirm';
 
     /**
      * PopConfirm constructor.
      *
-     * @param string|null $title
-     * @param array       $props
+     * @param string|array|null $title
+     * @param array             $attributes
      */
-    public function __construct(string $title=null, array $props = [])
+    public function __construct($title = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $title and $this->set('title', $title);
+        if (is_array($title)) {
+            parent::__construct($title);
+        } else {
+            parent::__construct($attributes);
+            $title and $this->set('title', $title);
+        }
     }
 }

@@ -30,7 +30,7 @@ class SubmenuTest extends TestCase
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-submenu>',
-            $submenu->build()
+            $submenu
         );
     }
 
@@ -46,7 +46,7 @@ class SubmenuTest extends TestCase
             . PHP_EOL . '<el-menu-item-group>' . PHP_EOL . '</el-menu-item-group>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-submenu>',
-            $submenu->build()
+            $submenu
         );
     }
 
@@ -62,7 +62,7 @@ class SubmenuTest extends TestCase
             . PHP_EOL . '<el-submenu>' . PHP_EOL . '</el-submenu>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-submenu>',
-            $submenu->build()
+            $submenu
         );
     }
 }

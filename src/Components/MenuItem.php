@@ -6,21 +6,34 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class MenuItem extends ElementUi
+/**
+ * Class MenuItem
+ *
+ * @method $this index(string $index, $store = null)
+ * @method $this route(array $route, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class MenuItem extends Component
 {
     /**
      * MenuItem constructor.
      *
-     * @param string|null $index
+     * @param string|array|null $index
      * @param string|null $text
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $index = null, string $text = null, array $props = [])
+    public function __construct( $index = null, string $text = null, array $attributes = [])
     {
-        parent::__construct($props);
-        is_null($index) or $this->set('index', $index);
-        $text and $this->add($text);
+        if (is_array($index)){
+            parent::__construct($index);
+        } else {
+            parent::__construct($attributes);
+            is_null($index) or $this->set('index', $index);
+            $text and $this->add($text);
+        }
     }
 }

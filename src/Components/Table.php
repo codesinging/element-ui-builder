@@ -7,14 +7,49 @@
 namespace CodeSinging\ElementUiBuilder\Components;
 
 use Closure;
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\TableSetters;
-use CodeSinging\Helpers\Str;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
+use CodeSinging\Support\Str;
 
-class Table extends ElementUi
+/**
+ * Class Table
+ *
+ * @method $this height(string|int $height, $store = null)
+ * @method $this maxHeight(string|int $maxHeight, $store = null)
+ * @method $this stripe(bool $stripe = true, $store = null)
+ * @method $this border(bool $border = true, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this fit(bool $fit = true, $store = null)
+ * @method $this showHeader(bool $showHeader = true, $store = null)
+ * @method $this highlightCurrentRow(bool $highlightCurrentRow = true, $store = null)
+ * @method $this currentRowKey(string|int $currentRowKey, $store = null)
+ * @method $this rowClassName(string $rowClassName, $store = null)
+ * @method $this rowStyle(array $rowStyle, $store = null)
+ * @method $this cellClassName(string $cellClassName, $store = null)
+ * @method $this cellStyle(array $cellStyle, $store = null)
+ * @method $this headerRowClassName(string $headerRowClassName, $store = null)
+ * @method $this headerRowStyle(array $headerRowStyle, $store = null)
+ * @method $this headerCellClassName(string $headerCellClassName, $store = null)
+ * @method $this headerCellStyle(array $headerCellStyle, $store = null)
+ * @method $this rowKey(string $rowKey, $store = null)
+ * @method $this emptyText(string $emptyText, $store = null)
+ * @method $this defaultExpandAll(bool $defaultExpandAll = true, $store = null)
+ * @method $this expandRowKeys(array $expandRowKeys, $store = null)
+ * @method $this defaultSort(array $defaultSort, $store = null)
+ * @method $this tooltipEffect(string $tooltipEffect, $store = null)
+ * @method $this showSummary(bool $showSummary = true, $store = null)
+ * @method $this sumText(string $sumText, $store = null)
+ * @method $this summaryMethod(string $summaryMethod, $store = null)
+ * @method $this spanMethod(string $spanMethod, $store = null)
+ * @method $this selectOnIndeterminate(bool $selectOnIndeterminate = true, $store = null)
+ * @method $this indent(int $indent, $store = null)
+ * @method $this lazy(bool $lazy = true, $store = null)
+ * @method $this load(string $load, $store = null)
+ * @method $this treeProps(array $treeProps, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Table extends Component
 {
-    use TableSetters;
-
     // Sizes
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
@@ -24,13 +59,17 @@ class Table extends ElementUi
      * Table constructor.
      *
      * @param string|array|null $data
-     * @param array             $props
+     * @param array             $attributes
      */
-    public function __construct($data = null, array $props = [])
+    public function __construct($data = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $data and $this->data($data);
-        $this->eol()->glue();
+        if (is_array($data)){
+            parent::__construct($data);
+        } else {
+            parent::__construct($attributes);
+            $data and $this->set(':data', $data);
+        }
+        $this->lineBreak()->glue();
     }
 
     /**
@@ -43,7 +82,7 @@ class Table extends ElementUi
     public function data($data)
     {
         if (is_string($data)) {
-            $this->bind('data', $data);
+            $this->set(':data', $data);
         } elseif (is_array($data)) {
             $this->set('data', $data);
         }

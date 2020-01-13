@@ -6,9 +6,28 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Popover extends ElementUi
+/**
+ * Class Popover
+ *
+ * @method $this trigger(string $trigger, $store = null)
+ * @method $this content(string $content, $store = null)
+ * @method $this width(string|int $width, $store = null)
+ * @method $this placement(string $placement, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this offset(int $offset, $store = null)
+ * @method $this transition(string $transition, $store = null)
+ * @method $this visibleArrow(bool $visibleArrow = true, $store = null)
+ * @method $this popperOptions(array $popperOptions, $store = null)
+ * @method $this popperClass(string $popperClass, $store = null)
+ * @method $this openDelay(int $openDelay, $store = null)
+ * @method $this closeDelay(int $closeDelay, $store = null)
+ * @method $this tabindex(int $tabindex, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Popover extends Component
 {
     // Triggers
     const TRIGGER_CLICK = 'click';
@@ -33,14 +52,18 @@ class Popover extends ElementUi
     /**
      * Popover constructor.
      *
-     * @param string|null $title
-     * @param string|null $message
-     * @param array       $props
+     * @param string|array|null $title
+     * @param string|null       $message
+     * @param array             $attributes
      */
-    public function __construct(string $title = null, string $message = null, array $props = [])
+    public function __construct($title = null, string $message = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $title and $this->set('title', $title);
-        $message and $this->set('content', $message);
+        if (is_array($title)) {
+            parent::__construct($title);
+        } else {
+            parent::__construct($attributes);
+            $title and $this->set('title', $title);
+            $message and $this->set('content', $message);
+        }
     }
 }

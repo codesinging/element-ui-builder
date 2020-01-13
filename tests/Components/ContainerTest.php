@@ -25,7 +25,7 @@ class ContainerTest extends TestCase
             '<el-container>'
             . PHP_EOL . '<el-container>' . PHP_EOL . '</el-container>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
     }
 
@@ -38,7 +38,7 @@ class ContainerTest extends TestCase
             '<el-container>'
             . PHP_EOL . '<el-header height="30px">' . PHP_EOL . '</el-header>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
     }
 
@@ -51,7 +51,7 @@ class ContainerTest extends TestCase
             '<el-container>'
             . PHP_EOL . '<el-footer height="30px">' . PHP_EOL . '</el-footer>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
     }
 
@@ -64,7 +64,7 @@ class ContainerTest extends TestCase
             '<el-container>'
             . PHP_EOL . '<el-aside width="30px">' . PHP_EOL . '</el-aside>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
     }
 
@@ -77,7 +77,7 @@ class ContainerTest extends TestCase
             '<el-container>'
             . PHP_EOL . '<el-main>' . PHP_EOL . '</el-main>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
     }
 
@@ -94,7 +94,7 @@ class ContainerTest extends TestCase
             . PHP_EOL . '<el-main>' . PHP_EOL . '</el-main>'
             . PHP_EOL . '<el-footer height="30px">' . PHP_EOL . '</el-footer>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
     }
 
@@ -115,7 +115,7 @@ class ContainerTest extends TestCase
             . PHP_EOL . '<el-main>' . PHP_EOL . '</el-main>'
             . PHP_EOL . '</el-container>'
             . PHP_EOL . '</el-container>',
-            $container->build()
+            $container
         );
 
     }

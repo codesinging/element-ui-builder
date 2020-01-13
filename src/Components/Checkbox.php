@@ -6,9 +6,24 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Checkbox extends ElementUi
+/**
+ * Class Checkbox
+ *
+ * @method $this label(string $label, $store = null)
+ * @method $this trueLabel(string|int $trueLabel, $store = null)
+ * @method $this falseLabel(string|int $falseLabel, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this border(bool $border = true, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this name(string $name, $store = null)
+ * @method $this checked(bool $checked = true, $store = null)
+ * @method $this indeterminate(bool $indeterminate = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Checkbox extends Component
 {
     // Checkbox sizes
     const SIZE_MEDIUM = 'medium';
@@ -18,16 +33,20 @@ class Checkbox extends ElementUi
     /**
      * Checkbox constructor.
      *
-     * @param string|null                $model
+     * @param string|array|null          $model
      * @param string|int|float|bool|null $label
      * @param string|null                $content
-     * @param array                      $props
+     * @param array                      $attributes
      */
-    public function __construct(string $model = null, string $label = null, string $content = null, array $props = [])
+    public function __construct($model = null, string $label = null, string $content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        $this->add($content);
-        is_null($label) or $this->set('label', $label);
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+            $this->add($content);
+            is_null($label) or $this->set('label', $label);
+        }
     }
 }

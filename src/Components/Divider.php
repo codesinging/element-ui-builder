@@ -6,9 +6,17 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Divider extends ElementUi
+/**
+ * Class Divider
+ *
+ * @method $this direction(string $direction, $store = null)
+ * @method $this contentPosition(string $contentPosition, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Divider extends Component
 {
     // Directions
     const DIRECTION_HORIZONTAL = 'horizontal';
@@ -22,12 +30,16 @@ class Divider extends ElementUi
     /**
      * Divider constructor.
      *
-     * @param string|null $content
-     * @param array       $props
+     * @param string|array|null $content
+     * @param array             $attributes
      */
-    public function __construct(string $content=null,array $props = [])
+    public function __construct($content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $content and $this->add($content);
+        if (is_array($content)) {
+            parent::__construct($content);
+        } else {
+            parent::__construct($attributes);
+            $content and $this->add($content);
+        }
     }
 }

@@ -6,9 +6,18 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Card extends ElementUi
+/**
+ * Class Card
+ *
+ * @method $this header(string $header, $store = null)
+ * @method $this bodyStyle(array $bodyStyle, $store = null)
+ * @method $this shadow(string $shadow, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Card extends Component
 {
     // Shadows
     const SHADOW_ALWAYS = 'always';
@@ -18,11 +27,11 @@ class Card extends ElementUi
     /**
      * Card constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 }

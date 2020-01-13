@@ -8,7 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Components;
 
 class DateRangePicker extends DatePicker
 {
-    protected $props = [
+    protected $attributes = [
         'type' => 'daterange',
     ];
 

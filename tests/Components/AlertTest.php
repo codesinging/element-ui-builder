@@ -15,5 +15,6 @@ class AlertTest extends TestCase
     {
         self::assertEquals('<el-alert></el-alert>', new Alert());
         self::assertEquals('<el-alert title="title"></el-alert>', new Alert('title'));
+        self::assertEquals('<el-alert title="title"></el-alert>', (new Alert())->title('title'));
     }
 }

@@ -7,9 +7,39 @@
 namespace CodeSinging\ElementUiBuilder\Components;
 
 use Closure;
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Select extends ElementUi
+/**
+ * Class Select
+ *
+ * @method $this multiple(bool $multiple = true, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this valueKey(string $valueKey, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this clearable(bool $clearable = true, $store = null)
+ * @method $this sollapseTags(bool $sollapseTags = true, $store = null)
+ * @method $this multipleLimit(int $multipleLimit, $store = null)
+ * @method $this name(string $name, $store = null)
+ * @method $this autocomplete(string $autocomplete, $store = null)
+ * @method $this placeholder(string $placeholder, $store = null)
+ * @method $this filterable(bool $filterable = true, $store = null)
+ * @method $this allowCreate(bool $allowCreate = true, $store = null)
+ * @method $this filterMethod(string $filterMethod, $store = null)
+ * @method $this remote(bool $remote = true, $store = null)
+ * @method $this remoteMethod(string $remoteMethod, $store = null)
+ * @method $this loading(bool $loading = true, $store = null)
+ * @method $this loadingText(string $loadingText, $store = null)
+ * @method $this noMatchText(string $noMatchText, $store = null)
+ * @method $this noDataText(string $noDataText, $store = null)
+ * @method $this popperClass(string $popperClass, $store = null)
+ * @method $this reserveKeyword(bool $reserveKeyword = true, $store = null)
+ * @method $this defaultFirstOption(bool $defaultFirstOption = true, $store = null)
+ * @method $this popperAppendToBody(bool $popperAppendToBody = true, $store = null)
+ * @method $this automaticDropdown(bool $automaticDropdown = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Select extends Component
 {
     // Sizes
     const SIZE_MEDIUM = 'medium';
@@ -25,16 +55,20 @@ class Select extends ElementUi
     /**
      * Select constructor.
      *
-     * @param string|null $model
+     * @param string|array|null $model
      * @param array       $options
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $model = null, array $options = [], array $props = [])
+    public function __construct( $model = null, array $options = [], array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        $this->options($options);
-        $this->eol()->glue();
+        if (is_array($model)){
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+            $this->options($options);
+        }
+        $this->lineBreak()->glue();
     }
 
     /**

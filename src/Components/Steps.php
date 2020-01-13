@@ -6,9 +6,22 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Steps extends ElementUi
+/**
+ * Class Steps
+ *
+ * @method $this space(string|int $space, $store = null)
+ * @method $this direction(string $direction, $store = null)
+ * @method $this active(int $active, $store = null)
+ * @method $this processStatus(string $processStatus, $store = null)
+ * @method $this finishStatus(string $finishStatus, $store = null)
+ * @method $this alignCenter(bool $alignCenter = true, $store = null)
+ * @method $this simple(bool $simple = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Steps extends Component
 {
     // Directions
     const DIRECTION_VERTICAL = 'vertical';
@@ -31,12 +44,12 @@ class Steps extends ElementUi
     /**
      * Steps constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 
     /**

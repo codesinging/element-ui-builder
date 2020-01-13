@@ -6,9 +6,25 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Carousel extends ElementUi
+/**
+ * Class Carousel
+ *
+ * @method $this height(string $height, $store = null)
+ * @method $this initialIndex(int $initialIndex, $store = null)
+ * @method $this trigger(string $trigger, $store = null)
+ * @method $this autoplay(bool $autoplay = true, $store = null)
+ * @method $this interval(int $interval, $store = null)
+ * @method $this indicatorPosition(string $indicatorPosition, $store = null)
+ * @method $this arrow(string $arrow, $store = null)
+ * @method $this type(string $type, $store = null)
+ * @method $this loop(bool $loop = true, $store = null)
+ * @method $this directory(string $directory, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Carousel extends Component
 {
     // Indicator positions
     const INDICATOR_POSITION_OUTSIDE = 'outside';
@@ -26,12 +42,12 @@ class Carousel extends ElementUi
     /**
      * Carousel constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 
     /**

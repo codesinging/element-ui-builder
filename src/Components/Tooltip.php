@@ -6,9 +6,29 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Tooltip extends ElementUi
+/**
+ * Class Tooltip
+ *
+ * @method $this effect(string $effect, $store = null)
+ * @method $this content(string $content, $store = null)
+ * @method $this placement(string $placement, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this offset(int $offset, $store = null)
+ * @method $this transition(string $transition, $store = null)
+ * @method $this visibleArrow(bool $visibleArrow = true, $store = null)
+ * @method $this popperOptions(array $popperOptions, $store = null)
+ * @method $this openDelay(int $openDelay, $store = null)
+ * @method $this manual(bool $manual = true, $store = null)
+ * @method $this popperClass(string $popperClass, $store = null)
+ * @method $this enterable(bool $enterable = true, $store = null)
+ * @method $this hideAfter(int $hideAfter, $store = null)
+ * @method $this tabindex(int $tabindex, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Tooltip extends Component
 {
     // Effects
     const EFFECT_DARK = 'dark';
@@ -31,12 +51,16 @@ class Tooltip extends ElementUi
     /**
      * Tooltip constructor.
      *
-     * @param string|null $message
-     * @param array       $props
+     * @param string|array|null $content
+     * @param array             $attributes
      */
-    public function __construct(string $message=null, array $props = [])
+    public function __construct($content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $message and $this->set('content', $message);
+        if (is_array($content)) {
+            parent::__construct($content);
+        } else {
+            parent::__construct($attributes);
+            $content and $this->set('content', $content);
+        }
     }
 }

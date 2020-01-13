@@ -30,7 +30,7 @@ class CheckboxGroupTest extends TestCase
             . PHP_EOL . '<el-checkbox disabled label="book"></el-checkbox>'
             . PHP_EOL . '<el-checkbox label="pen"></el-checkbox>'
             . PHP_EOL . '</el-checkbox-group>',
-            $group->build()
+            $group
         );
     }
 
@@ -48,7 +48,7 @@ class CheckboxGroupTest extends TestCase
             . PHP_EOL . '<el-checkbox-button label="book"></el-checkbox-button>'
             . PHP_EOL . '<el-checkbox-button label="pen"></el-checkbox-button>'
             . PHP_EOL . '</el-checkbox-group>',
-            $group->build()
+            $group
         );
     }
 
@@ -63,7 +63,7 @@ class CheckboxGroupTest extends TestCase
             . PHP_EOL . '<el-checkbox label="book"></el-checkbox>'
             . PHP_EOL . '<el-checkbox label="pen"></el-checkbox>'
             . PHP_EOL . '</el-checkbox-group>',
-            $group->build()
+            (string)$group
         );
     }
 
@@ -78,7 +78,7 @@ class CheckboxGroupTest extends TestCase
             . PHP_EOL . '<el-checkbox-button label="book"></el-checkbox-button>'
             . PHP_EOL . '<el-checkbox-button label="pen"></el-checkbox-button>'
             . PHP_EOL . '</el-checkbox-group>',
-            $group->build()
+            $group
         );
     }
 }

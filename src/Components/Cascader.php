@@ -6,9 +6,9 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Cascader extends ElementUi
+class Cascader extends Component
 {
     // Sizes
     const SIZE_MEDIUM = 'medium';
@@ -18,14 +18,18 @@ class Cascader extends ElementUi
     /**
      * Cascader constructor.
      *
-     * @param string|null $model
-     * @param string|null $options
-     * @param array       $props
+     * @param string|array|null $model
+     * @param string|null       $options
+     * @param array             $attributes
      */
-    public function __construct(string $model = null, string $options = null, array $props = [])
+    public function __construct($model = null, string $options = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $options and $this->bind('options', $options);
-        $model and $this->vModel($model);
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $options and $this->set(':options', $options);
+            $model and $this->vModel($model);
+        }
     }
 }

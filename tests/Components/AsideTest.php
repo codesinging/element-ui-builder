@@ -13,7 +13,7 @@ class AsideTest extends TestCase
 {
     public function testBuild()
     {
-        self::assertEquals('<el-aside>' . PHP_EOL . '</el-aside>', new Aside());
+        self::assertEquals('<el-aside>' . PHP_EOL . '</el-aside>', (string)new Aside());
         self::assertEquals('<el-aside width="300px">' . PHP_EOL . '</el-aside>', new Aside('300px'));
     }
 }

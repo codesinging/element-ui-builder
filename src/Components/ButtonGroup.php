@@ -7,22 +7,23 @@
 namespace CodeSinging\ElementUiBuilder\Components;
 
 use Closure;
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\ButtonGroupSetters;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class ButtonGroup extends ElementUi
+/**
+ * Class ButtonGroup
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class ButtonGroup extends Component
 {
-    use ButtonGroupSetters;
-
     /**
      * ButtonGroup constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol();
+        parent::__construct($attributes);
+        $this->lineBreak();
         $this->glue();
     }
 
@@ -37,7 +38,7 @@ class ButtonGroup extends ElementUi
      */
     public function button($text = null, string $type = null, array $props = [])
     {
-        if (is_string($text)) {
+        if (is_string($text) || is_array($text)) {
             $button = new Button($text, $type, $props);
         } elseif ($text instanceof Closure) {
             $button = new Button();

@@ -6,21 +6,33 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class CarouselItem extends ElementUi
+/**
+ * Class CarouselItem
+ *
+ * @method $this name(string $name, $store = null)
+ * @method $this label(string $label, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class CarouselItem extends Component
 {
     /**
      * CarouselItem constructor.
      *
-     * @param string|null $name
+     * @param string|array|null $name
      * @param string|null $label
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $name = null, string $label = null, array $props = [])
+    public function __construct( $name = null, string $label = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $name and $this->set('name', $name);
-        $label and $this->set('label', $label);
+        if (is_array($name)){
+            parent::__construct($name);
+        } else {
+            parent::__construct($attributes);
+            $name and $this->set('name', $name);
+            $label and $this->set('label', $label);
+        }
     }
 }

@@ -6,21 +6,33 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class PageHeader extends ElementUi
+/**
+ * Class PageHeader
+ *
+ * @method $this title(string $title, $store = null)
+ * @method $this content(string $content, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class PageHeader extends Component
 {
     /**
      * PageHeader constructor.
      *
-     * @param string|null $title
-     * @param string|null $content
-     * @param array       $props
+     * @param string|array|null $title
+     * @param string|null       $content
+     * @param array             $attributes
      */
-    public function __construct(string $title=null, string $content=null, array $props = [])
+    public function __construct($title = null, string $content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $title and $this->set('title', $title);
-        $content and $this->set('content', $content);
+        if (is_array($title)) {
+            parent::__construct($title);
+        } else {
+            parent::__construct($attributes);
+            $title and $this->set('title', $title);
+            $content and $this->set('content', $content);
+        }
     }
 }

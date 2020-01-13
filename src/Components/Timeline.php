@@ -6,29 +6,40 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Timeline extends ElementUi
+/**
+ * Class Timeline
+ *
+ * @method $this reverse(bool $reverse = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Timeline extends Component
 {
     /**
      * Timeline constructor.
      *
-     * @param bool|null $reverse
-     * @param array     $props
+     * @param bool|array|null $reverse
+     * @param array           $attributes
      */
-    public function __construct(bool $reverse = null, array $props = [])
+    public function __construct($reverse = null, array $attributes = [])
     {
-        parent::__construct($props);
-        is_bool($reverse) and $this->set('reverse', $reverse);
-        $this->eol()->glue();
+        if (is_array($reverse)) {
+            parent::__construct($reverse);
+        } else {
+            parent::__construct($attributes);
+            is_bool($reverse) and $this->set('reverse', $reverse);
+        }
+        $this->lineBreak()->glue();
     }
 
     /**
      * Add a TimelineItem.
      *
      * @param string|\Closure|TimelineItem|null $timestamp
-     * @param string|null $content
-     * @param array       $props
+     * @param string|null                       $content
+     * @param array                             $props
      *
      * @return TimelineItem
      */

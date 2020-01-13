@@ -6,17 +6,25 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ComponentBuilder\Component;
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\FormItemSetters;
-use CodeSinging\Helpers\Str;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
+use CodeSinging\Support\Str;
 
 /**
  * Class FormItem
  *
- * @method FormItem radio(string $model = null, $label = null, string $content = null, array $props = [])
+ * @method $this prop(string $prop, $store = null)
+ * @method $this label(string $label, $store = null)
+ * @method $this labelWidth(string $labelWidth, $store = null)
+ * @method $this required(bool $required = true, $store = null)
+ * @method $this rules(array $rules, $store = null)
+ * @method $this error(string $error, $store = null)
+ * @method $this showMessage(bool $showMessage = true, $store = null)
+ * @method $this inlineMessage(bool $inlineMessage = true, $store = null)
+ * @method $this size(string $size, $store = null)
+ *
+ * @method FormItem radio($model = null, $label = null, string $content = null, array $props = [])
  * @method FormItem radioGroup($model, array $options = [], array $props = [])
- * @method FormItem checkbox(string $model = null, $label = null, string $content = null, array $props = [])
+ * @method FormItem checkbox($model = null, $label = null, string $content = null, array $props = [])
  * @method FormItem checkboxGroup($model, array $options = [], array $props = [])
  * @method FormItem input($model, array $props = [])
  * @method FormItem inputNumber($model, array $props = [])
@@ -40,10 +48,8 @@ use CodeSinging\Helpers\Str;
  *
  * @package CodeSinging\ElementUiBuilder\Components
  */
-class FormItem extends ElementUi
+class FormItem extends Component
 {
-    use FormItemSetters;
-
     // The sizes.
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
@@ -64,7 +70,7 @@ class FormItem extends ElementUi
     }
 
     /**
-     * Bind a form component with the FormItem.
+     * Handle dynamic calls to the builder to set attributes or bind a component.
      *
      * @param string $name
      * @param array  $arguments
@@ -73,25 +79,64 @@ class FormItem extends ElementUi
      */
     public function __call($name, $arguments)
     {
-        $name = Str::beforeLast(get_class($this), '\\') . '\\' . ucfirst($name);
+        $components = [
+            'radio',
+            'radioGroup',
+            'checkbox',
+            'checkboxGroup',
+            'input',
+            'inputNumber',
+            'select',
+            'cascader',
+            'switcher',
+            'slider',
+            'datePicker',
+            'dateTimePicker',
+            'datesPicker',
+            'dateRangePicker',
+            'dateTimeRangePicker',
+            'weekPicker',
+            'monthPicker',
+            'yearPicker',
+            'timeSelect',
+            'timePicker',
+            'rate',
+            'colorPicker',
+            'transfer',
+        ];
+
+        if (in_array($name, $components)) {
+            $this->bindComponent($name, $arguments);
+        } else {
+            parent::__call($name, $arguments);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Bind a component to the form item.
+     *
+     * @param string $name
+     * @param array  $arguments
+     */
+    protected function bindComponent(string $name, array $arguments)
+    {
+        $class = Str::beforeLast(get_class($this), '\\') . '\\' . ucfirst($name);
 
         $model = array_shift($arguments);
 
-        /** @var Component $component */
-        $component = new $name(null, ...$arguments);
 
-        if (is_string($model)) {
-            $component->vModel($model);
-        } elseif ($model instanceof \Closure) {
-            $component = call_user_func($model, $component);
-        } elseif ($model instanceof Input) {
+        if ($model instanceof \Closure) {
+            /** @var Component $component */
+            $component = new $class();
+            $component = call_user_func($model, $component) ?? $component;
+        } elseif ($model instanceof Component) {
             $component = $model;
-        } elseif (is_array($model)) {
-            $component->set($model);
+        } else {
+            $component = new $class($model, ...$arguments);
         }
 
         $this->add($component);
-
-        return $this;
     }
 }

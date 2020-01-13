@@ -6,21 +6,36 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class TabPane extends ElementUi
+/**
+ * Class TabPane
+ *
+ * @method $this label(string $label, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this name(string $name, $store = null)
+ * @method $this closable(bool $closable = true, $store = null)
+ * @method $this lazy(bool $lazy = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class TabPane extends Component
 {
     /**
      * TabPane constructor.
      *
-     * @param string|null $label
-     * @param string|null $name
-     * @param array       $props
+     * @param string|array|null $label
+     * @param string|null       $name
+     * @param array             $attributes
      */
-    public function __construct(string $label = null, string $name = null, array $props = [])
+    public function __construct($label = null, string $name = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $label and $this->set('label', $label);
-        $name and $this->set('name', $name);
+        if (is_array($label)) {
+            parent::__construct($label);
+        } else {
+            parent::__construct($attributes);
+            $label and $this->set('label', $label);
+            $name and $this->set('name', $name);
+        }
     }
 }

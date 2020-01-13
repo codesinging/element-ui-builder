@@ -27,7 +27,7 @@ class CollapseTest extends TestCase
             . PHP_EOL . '<el-collapse-item></el-collapse-item>'
             . PHP_EOL . '<el-collapse-item></el-collapse-item>'
             . PHP_EOL . '</el-collapse>',
-            $collapse->build()
+            $collapse
         );
     }
 }

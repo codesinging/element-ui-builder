@@ -27,7 +27,7 @@ class MenuTest extends TestCase
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-menu>',
-            $menu->build()
+            $menu
         );
     }
 
@@ -42,7 +42,7 @@ class MenuTest extends TestCase
             . PHP_EOL . '<el-menu-item-group>' . PHP_EOL . '</el-menu-item-group>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-menu>',
-            $menu->build()
+            $menu
         );
     }
 
@@ -57,7 +57,7 @@ class MenuTest extends TestCase
             . PHP_EOL . '<el-submenu>' . PHP_EOL . '</el-submenu>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-menu>',
-            $menu->build()
+            $menu
         );
     }
 }

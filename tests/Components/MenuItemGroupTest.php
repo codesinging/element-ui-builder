@@ -28,7 +28,7 @@ class MenuItemGroupTest extends TestCase
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-menu-item-group>',
-            $group->build()
+            $group
         );
     }
 
@@ -43,7 +43,7 @@ class MenuItemGroupTest extends TestCase
             . PHP_EOL . '<el-submenu>' . PHP_EOL . '</el-submenu>'
             . PHP_EOL . '<el-menu-item></el-menu-item>'
             . PHP_EOL . '</el-menu-item-group>',
-            $group->build()
+            $group
         );
     }
 }

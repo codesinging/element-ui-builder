@@ -8,7 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Components;
 
 class WeekPicker extends DatePicker
 {
-    protected $props = [
+    protected $attributes = [
         'type' => 'week',
     ];
 

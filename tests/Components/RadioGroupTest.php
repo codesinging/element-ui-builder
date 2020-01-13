@@ -30,7 +30,7 @@ class RadioGroupTest extends TestCase
             . PHP_EOL . '<el-radio label="female"></el-radio>'
             . PHP_EOL . '<el-radio label="male"></el-radio>'
             . PHP_EOL . '</el-radio-group>',
-            $group->build()
+            $group
         );
     }
 
@@ -48,7 +48,7 @@ class RadioGroupTest extends TestCase
             . PHP_EOL . '<el-radio-button label="female"></el-radio-button>'
             . PHP_EOL . '<el-radio-button label="male"></el-radio-button>'
             . PHP_EOL . '</el-radio-group>',
-            $group->build()
+            $group
         );
     }
 
@@ -63,7 +63,7 @@ class RadioGroupTest extends TestCase
             . PHP_EOL . '<el-radio label="female"></el-radio>'
             . PHP_EOL . '<el-radio label="male"></el-radio>'
             . PHP_EOL . '</el-radio-group>',
-            $group->build()
+            $group
         );
     }
 
@@ -78,7 +78,7 @@ class RadioGroupTest extends TestCase
             . PHP_EOL . '<el-radio-button label="female"></el-radio-button>'
             . PHP_EOL . '<el-radio-button label="male"></el-radio-button>'
             . PHP_EOL . '</el-radio-group>',
-            $group->build()
+            $group
         );
     }
 }

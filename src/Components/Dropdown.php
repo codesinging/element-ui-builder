@@ -6,9 +6,24 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Dropdown extends ElementUi
+/**
+ * Class Dropdown
+ *
+ * @method $this type(string $type, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this splitButton(bool $splitButton = true, $store = null)
+ * @method $this placement(string $placement, $store = null)
+ * @method $this trigger(string $trigger, $store = null)
+ * @method $this hideOnClick(bool $hideOnClick = true, $store = null)
+ * @method $this showTimeout(int $showTimeout, $store = null)
+ * @method $this hideTimeout(int $hideTimeout, $store = null)
+ * @method $this tabindex(int $tabindex, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Dropdown extends Component
 {
     // Types
     const TYPE_PRIMARY = 'primary';
@@ -44,15 +59,19 @@ class Dropdown extends ElementUi
     /**
      * Dropdown constructor.
      *
-     * @param string|null $content
-     * @param array       $props
+     * @param string|array|null $content
+     * @param array             $attributes
      */
-    public function __construct(string $content = null, array $props = [])
+    public function __construct($content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $this->add($content);
-        $this->eol()->glue();
+        if (is_array($content)) {
+            parent::__construct($content);
+        } else {
+            parent::__construct($attributes);
+            $this->add($content);
+        }
 
+        $this->lineBreak()->glue();
         $this->menu = new DropdownMenu();
     }
 
@@ -74,6 +93,6 @@ class Dropdown extends ElementUi
      */
     protected function __build()
     {
-        $this->menu->empty() or $this->add($this->menu);
+        $this->menu->isEmpty() or $this->add($this->menu);
     }
 }

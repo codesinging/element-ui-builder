@@ -33,7 +33,7 @@ class RowTest extends TestCase
             . PHP_EOL . '<el-col></el-col>'
             . PHP_EOL . '<el-col :span="6" :offset="3"></el-col>'
             . PHP_EOL . '</el-row>',
-            $row->build()
+            $row
         );
     }
 }

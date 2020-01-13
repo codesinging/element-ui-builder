@@ -6,18 +6,18 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Main extends ElementUi
+class Main extends Component
 {
     /**
      * Main constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->glue()->eol();
+        parent::__construct($attributes);
+        $this->glue()->lineBreak();
     }
 }

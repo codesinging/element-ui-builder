@@ -8,7 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Components;
 
 class YearPicker extends DatePicker
 {
-    protected $props = [
+    protected $attributes = [
         'type' => 'year',
     ];
 

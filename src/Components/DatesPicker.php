@@ -8,7 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Components;
 
 class DatesPicker extends DatePicker
 {
-    protected $props = [
+    protected $attributes = [
         'type' => 'dates',
     ];
 

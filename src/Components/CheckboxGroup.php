@@ -6,9 +6,22 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use Closure;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class CheckboxGroup extends ElementUi
+/**
+ * Class CheckboxGroup
+ *
+ * @method $this size(string $size, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this min(int $min, $store = null)
+ * @method $this max(int $max, $store = null)
+ * @method $this textColor(string $textColor, $store = null)
+ * @method $this fill(string $fill, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class CheckboxGroup extends Component
 {
     // CheckboxGroup sizes
     const SIZE_MEDIUM = 'medium';
@@ -30,15 +43,20 @@ class CheckboxGroup extends ElementUi
     /**
      * CheckboxGroup constructor.
      *
-     * @param string|null $model
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $options
+     * @param array             $attributes
      */
-    public function __construct(string $model = null, array $options=[], array $props = [])
+    public function __construct($model = null, array $options = [], array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
-        $this->options($options);
-        $this->glue()->eol();
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+            $this->options($options);
+            $this->glue()->lineBreak();
+        }
     }
 
     /**
@@ -70,15 +88,15 @@ class CheckboxGroup extends ElementUi
     /**
      * Add a Checkbox.
      *
-     * @param string|\Closure|Checkbox|null $label
-     * @param string|null                   $content
-     * @param array                         $props
+     * @param string|array|Closure|Checkbox|null $label
+     * @param string|null                        $content
+     * @param array                              $props
      *
      * @return Checkbox
      */
     public function checkbox($label = null, string $content = null, array $props = [])
     {
-        if ($label instanceof \Closure) {
+        if ($label instanceof Closure) {
             $checkbox = new Checkbox(null, null, $content, $props);
             $checkbox = call_user_func($label, $checkbox) ?? $checkbox;
         } elseif ($label instanceof Checkbox) {
@@ -95,15 +113,15 @@ class CheckboxGroup extends ElementUi
     /**
      * Add a CheckboxButton.
      *
-     * @param string|\Closure|CheckboxButton|null $label
-     * @param string|null                         $content
-     * @param array                               $props
+     * @param string|array|Closure|CheckboxButton|null $label
+     * @param string|null                              $content
+     * @param array                                    $props
      *
      * @return CheckboxButton
      */
     public function checkboxButton($label = null, string $content = null, array $props = [])
     {
-        if ($label instanceof \Closure) {
+        if ($label instanceof Closure) {
             $checkboxButton = new CheckboxButton(null, $content, $props);
             $checkboxButton = call_user_func($label, $checkboxButton) ?? $checkboxButton;
         } elseif ($label instanceof CheckboxButton) {

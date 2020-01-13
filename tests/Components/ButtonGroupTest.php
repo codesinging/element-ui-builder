@@ -27,7 +27,7 @@ class ButtonGroupTest extends TestCase
             . PHP_EOL . '<el-button>Button</el-button>'
             . PHP_EOL . '<el-button type="success">Success</el-button>'
             . PHP_EOL . '</el-button-group>',
-            $group->build()
+            $group
         );
     }
 }

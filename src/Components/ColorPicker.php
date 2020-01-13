@@ -6,9 +6,21 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class ColorPicker extends ElementUi
+/**
+ * Class ColorPicker
+ *
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this showAlpha(bool $showAlpha = true, $store = null)
+ * @method $this colorFormat(string $colorFormat, $store = null)
+ * @method $this popperClass(string $popperClass, $store = null)
+ * @method $this predefine(array $predefine, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class ColorPicker extends Component
 {
     // Sizes
     const SIZE_MEDIUM = 'medium';
@@ -18,12 +30,16 @@ class ColorPicker extends ElementUi
     /**
      * ColorPicker constructor.
      *
-     * @param string|null $model
-     * @param array       $props
+     * @param string|array|null $model
+     * @param array             $attributes
      */
-    public function __construct(string $model=null,array $props = [])
+    public function __construct($model = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $model and $this->vModel($model);
+        if (is_array($model)) {
+            parent::__construct($model);
+        } else {
+            parent::__construct($attributes);
+            $model and $this->vModel($model);
+        }
     }
 }

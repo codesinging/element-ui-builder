@@ -6,10 +6,18 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ComponentBuilder\Element;
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ComponentBuilder\Builder;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class BreadcrumbItem extends ElementUi
+/**
+ * Class BreadcrumbItem
+ *
+ * @method $this to(string|array $to, $store = null)
+ * @method $this replace(bool $replace = true, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class BreadcrumbItem extends Component
 {
     /**
      * BreadcrumbItem text.
@@ -26,15 +34,33 @@ class BreadcrumbItem extends ElementUi
     /**
      * BreadcrumbItem constructor.
      *
-     * @param string|null $text
-     * @param string|null $url
-     * @param array       $props
+     * @param string|array|null $text
+     * @param string|null       $url
+     * @param array             $attributes
      */
-    public function __construct(string $text = null, string $url = null, array $props = [])
+    public function __construct($text = null, string $url = null, array $attributes = [])
     {
-        parent::__construct($props);
+        if (is_array($text)) {
+            parent::__construct($text);
+        } else {
+            parent::__construct($attributes);
+            $text and $this->link($text, $url);
+        }
+    }
+
+    /**
+     * Set a link to the breadcrumb item.
+     *
+     * @param string      $text
+     * @param string|null $url
+     *
+     * @return $this
+     */
+    public function link(string $text, string $url = null)
+    {
         $this->text = $text;
         $this->url = $url;
+        return $this;
     }
 
     /**
@@ -45,7 +71,7 @@ class BreadcrumbItem extends ElementUi
         if (empty($this->url)) {
             $content = $this->text;
         } else {
-            $content = new Element('a', $this->text, ['href' => $this->url]);
+            $content = new Builder('a', $this->text, ['href' => $this->url]);
         }
         $this->add($content);
     }

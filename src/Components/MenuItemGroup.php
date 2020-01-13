@@ -6,11 +6,18 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 use CodeSinging\ElementUiBuilder\Methods\MenuItemMethod;
 use CodeSinging\ElementUiBuilder\Methods\SubmenuMethod;
 
-class MenuItemGroup extends ElementUi
+/**
+ * Class MenuItemGroup
+ *
+ * @method $this title(string $title, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class MenuItemGroup extends Component
 {
     use MenuItemMethod;
     use SubmenuMethod;
@@ -18,13 +25,17 @@ class MenuItemGroup extends ElementUi
     /**
      * MenuItemGroup constructor.
      *
-     * @param string|null $title
-     * @param array       $props
+     * @param string|array|null $title
+     * @param array             $attributes
      */
-    public function __construct(string $title = null, array $props = [])
+    public function __construct($title = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $title and $this->set('title', $title);
-        $this->eol()->glue();
+        if (is_array($title)) {
+            parent::__construct($title);
+        } else {
+            parent::__construct($attributes);
+            $title and $this->set('title', $title);
+        }
+        $this->lineBreak()->glue();
     }
 }

@@ -7,40 +7,47 @@
 namespace CodeSinging\ElementUiBuilder\Components;
 
 use Closure;
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Container extends ElementUi
+/**
+ * Class Container
+ *
+ * @method $this direction(string $direction, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Container extends Component
 {
     /**
      * Container constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 
     /**
      * Add a container.
      *
-     * @param array|Closure|Container $props
+     * @param array|Closure|Container $attributes
      *
      * @return Container
      */
-    public function container($props = [])
+    public function container($attributes = [])
     {
-        if ($props instanceof Closure) {
+        if ($attributes instanceof Closure) {
             $container = new self();
-            $container = call_user_func($props, $container) ?? $container;
-        } elseif ($props instanceof self) {
-            $container = $props;
+            $container = call_user_func($attributes, $container) ?? $container;
+        } elseif ($attributes instanceof self) {
+            $container = $attributes;
         } else {
-            $container = new self($props);
+            $container = new self($attributes);
         }
 
-        $this->content($container);
+        $this->add($container);
 
         return $container;
     }
@@ -48,12 +55,12 @@ class Container extends ElementUi
     /**
      * Add a Header.
      *
-     * @param string|Closure|Header|null $height
-     * @param array                      $props
+     * @param string|array|Closure|Header|null $height
+     * @param array                            $attributes
      *
      * @return Header
      */
-    public function header($height = null, array $props = [])
+    public function header($height = null, array $attributes = [])
     {
         if ($height instanceof Closure) {
             $header = new Header();
@@ -61,10 +68,10 @@ class Container extends ElementUi
         } elseif ($height instanceof Header) {
             $header = $height;
         } else {
-            $header = new Header($height, $props);
+            $header = new Header($height, $attributes);
         }
 
-        $this->content($header);
+        $this->add($header);
 
         return $header;
     }
@@ -72,12 +79,12 @@ class Container extends ElementUi
     /**
      * Add a Footer.
      *
-     * @param string|Closure|Footer|null $height
-     * @param array                      $props
+     * @param string|array|Closure|Footer|null $height
+     * @param array                            $attributes
      *
      * @return Footer
      */
-    public function footer($height = null, array $props = [])
+    public function footer($height = null, array $attributes = [])
     {
         if ($height instanceof Closure) {
             $footer = new Footer();
@@ -85,10 +92,10 @@ class Container extends ElementUi
         } elseif ($height instanceof Header) {
             $footer = $height;
         } else {
-            $footer = new Footer($height, $props);
+            $footer = new Footer($height, $attributes);
         }
 
-        $this->content($footer);
+        $this->add($footer);
 
         return $footer;
     }
@@ -96,12 +103,12 @@ class Container extends ElementUi
     /**
      * Add a Aside.
      *
-     * @param string|Closure|Aside|null $width
-     * @param array                     $props
+     * @param string|array|Closure|Aside|null $width
+     * @param array                           $attributes
      *
      * @return Aside
      */
-    public function aside($width = null, array $props = [])
+    public function aside($width = null, array $attributes = [])
     {
         if ($width instanceof Closure) {
             $aside = new Aside();
@@ -109,10 +116,10 @@ class Container extends ElementUi
         } elseif ($width instanceof Header) {
             $aside = $width;
         } else {
-            $aside = new Aside($width, $props);
+            $aside = new Aside($width, $attributes);
         }
 
-        $this->content($aside);
+        $this->add($aside);
 
         return $aside;
     }
@@ -120,22 +127,22 @@ class Container extends ElementUi
     /**
      * Add a Main.
      *
-     * @param array|Closure|Main $props
+     * @param array|Closure|Main $attributes
      *
      * @return Main
      */
-    public function main($props = [])
+    public function main($attributes = [])
     {
-        if ($props instanceof Closure) {
+        if ($attributes instanceof Closure) {
             $main = new Main();
-            $main = call_user_func($props, $main) ?? $main;
-        } elseif ($props instanceof Header) {
-            $main = $props;
+            $main = call_user_func($attributes, $main) ?? $main;
+        } elseif ($attributes instanceof Header) {
+            $main = $attributes;
         } else {
-            $main = new Main($props);
+            $main = new Main($attributes);
         }
 
-        $this->content($main);
+        $this->add($main);
 
         return $main;
     }

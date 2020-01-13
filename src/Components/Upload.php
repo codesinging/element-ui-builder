@@ -6,9 +6,9 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Upload extends ElementUi
+class Upload extends Component
 {
     // List types
     const LIST_TYPE_TEXT = 'text';
@@ -18,11 +18,11 @@ class Upload extends ElementUi
     /**
      * Upload constructor.
      *
-     * @param array $props
+     * @param array $attributes
      */
-    public function __construct(array $props = [])
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($props);
-        $this->eol()->glue();
+        parent::__construct($attributes);
+        $this->lineBreak()->glue();
     }
 }

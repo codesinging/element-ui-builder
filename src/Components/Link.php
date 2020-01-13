@@ -6,13 +6,21 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
-use CodeSinging\ElementUiBuilder\Setters\LinkSetters;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Link extends ElementUi
+/**
+ * Class Link
+ *
+ * @method $this type(string $type, $store = null)
+ * @method $this underline(bool $underline = true, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this href(string $href, $store = null)
+ * @method $this icon(string $icon, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Link extends Component
 {
-    use LinkSetters;
-
     // Link types
     const TYPE_PRIMARY = 'primary';
     const TYPE_SUCCESS = 'success';
@@ -23,14 +31,18 @@ class Link extends ElementUi
     /**
      * Link constructor.
      *
-     * @param string|null $text
+     * @param string|array|null $text
      * @param string|null $type
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $text = null, string $type = null, array $props = [])
+    public function __construct( $text = null, string $type = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $text and $this->content($text);
-        $type and $this->set('type', $type);
+        if (is_array($text)){
+            parent::__construct($text);
+        } else {
+            parent::__construct($attributes);
+            $text and $this->add($text);
+            $type and $this->set('type', $type);
+        }
     }
 }

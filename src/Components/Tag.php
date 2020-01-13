@@ -6,9 +6,22 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Tag extends ElementUi
+/**
+ * Class Tag
+ *
+ * @method $this type(string $type, $store = null)
+ * @method $this closable(bool $closable = true, $store = null)
+ * @method $this disableTransitions(bool $disableTransitions = true, $store = null)
+ * @method $this hit(bool $hit = true, $store = null)
+ * @method $this color(string $color, $store = null)
+ * @method $this size(string $size, $store = null)
+ * @method $this effect(string $effect, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Tag extends Component
 {
     // Types
     const TYPE_SUCCESS = 'success';
@@ -29,14 +42,18 @@ class Tag extends ElementUi
     /**
      * Tag constructor.
      *
-     * @param string|null $text
-     * @param string|null $type
-     * @param array       $props
+     * @param string|array|null $text
+     * @param string|null       $type
+     * @param array             $attributes
      */
-    public function __construct(string $text = null, string $type = null, array $props = [])
+    public function __construct($text = null, string $type = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $text and $this->add($text);
-        $type and $this->set('type', $type);
+        if (is_array($text)) {
+            parent::__construct($text);
+        } else {
+            parent::__construct($attributes);
+            $text and $this->add($text);
+            $type and $this->set('type', $type);
+        }
     }
 }

@@ -6,20 +6,40 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class Aside extends ElementUi
+/**
+ * Class Aside
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class Aside extends Component
 {
     /**
      * Aside constructor.
      *
      * @param string|null $width
-     * @param array       $props
+     * @param array       $attributes
      */
-    public function __construct(string $width = null, array $props = [])
+    public function __construct($width = null, array $attributes = [])
     {
-        parent::__construct($props);
-        $width and $this->set('width', $width);
-        $this->eol()->glue();
+        if (is_array($width)) {
+            parent::__construct($width);
+        } else {
+            parent::__construct($attributes);
+            $width and $this->set('width', $width);
+        }
+        $this->lineBreak();
+        $this->glue();
+    }
+
+    /**
+     * Set width attribute.
+     *
+     * @param string|int $width
+     */
+    public function width($width)
+    {
+        is_int($width) and $width = $width . 'px';
+        $this->set('width', $width);
     }
 }

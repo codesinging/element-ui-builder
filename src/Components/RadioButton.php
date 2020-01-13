@@ -6,21 +6,34 @@
 
 namespace CodeSinging\ElementUiBuilder\Components;
 
-use CodeSinging\ElementUiBuilder\ElementUi;
+use CodeSinging\ElementUiBuilder\Foundation\Component;
 
-class RadioButton extends ElementUi
+/**
+ * Class RadioButton
+ *
+ * @method $this label(string $label, $store = null)
+ * @method $this disabled(bool $disabled = true, $store = null)
+ * @method $this name(string $name, $store = null)
+ *
+ * @package CodeSinging\ElementUiBuilder\Components
+ */
+class RadioButton extends Component
 {
     /**
      * RadioButton constructor.
      *
-     * @param string|null $label
-     * @param string|null $content
-     * @param array       $props
+     * @param string|array|null $label
+     * @param string|null       $content
+     * @param array             $attributes
      */
-    public function __construct(string $label = null, string $content=null, array $props = [])
+    public function __construct($label = null, string $content = null, array $attributes = [])
     {
-        parent::__construct($props);
-        is_null($label) or $this->set('label', $label);
-        $this->add($content);
+        if (is_array($label)) {
+            parent::__construct($label);
+        } else {
+            parent::__construct($attributes);
+            is_null($label) or $this->set('label', $label);
+            $this->add($content);
+        }
     }
 }
