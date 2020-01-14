@@ -6,11 +6,9 @@
 
 namespace CodeSinging\ElementUiBuilder\Foundation;
 
-use CodeSinging\ComponentBuilder\Builder;
-use CodeSinging\Support\Repository;
 use CodeSinging\Support\Str;
 
-class Component extends Builder
+class Component extends Element
 {
     /**
      * The component tag prefix.
