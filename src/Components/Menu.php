@@ -7,9 +7,6 @@
 namespace CodeSinging\ElementUiBuilder\Components;
 
 use CodeSinging\ElementUiBuilder\Foundation\Component;
-use CodeSinging\ElementUiBuilder\Methods\MenuItemGroupMethod;
-use CodeSinging\ElementUiBuilder\Methods\MenuItemMethod;
-use CodeSinging\ElementUiBuilder\Methods\SubmenuMethod;
 
 /**
  * Class Menu
@@ -30,10 +27,6 @@ use CodeSinging\ElementUiBuilder\Methods\SubmenuMethod;
  */
 class Menu extends Component
 {
-    use MenuItemMethod;
-    use SubmenuMethod;
-    use MenuItemGroupMethod;
-
     // Modes
     const MODE_HORIZONTAL = 'horizontal';
     const MODE_VERTICAL = 'vertical';
@@ -51,5 +44,79 @@ class Menu extends Component
     {
         parent::__construct($attributes);
         $this->lineBreak()->glue();
+    }
+
+    /**
+     * Add a MenuItemGroup.
+     *
+     * @param string|\Closure|MenuItemGroup|null $title
+     * @param array                              $attributes
+     *
+     * @return MenuItemGroup
+     */
+    public function menuItemGroup($title = null, array $attributes = [])
+    {
+        if ($title instanceof \Closure) {
+            $group = new MenuItemGroup();
+            $group = call_user_func($title, $group) ?? $group;
+        } elseif ($title instanceof MenuItemGroup) {
+            $group = $title;
+        } else {
+            $group = new MenuItemGroup($title, $attributes);
+        }
+
+        $this->add($group);
+
+        return $group;
+    }
+
+    /**
+     * Add a MenuItem.
+     *
+     * @param string|\Closure|MenuItem|null $index
+     * @param string|null                   $text
+     * @param array                         $attributes
+     *
+     * @return MenuItem
+     */
+    public function menuItem($index = null, string $text = null, array $attributes = [])
+    {
+        if ($index instanceof \Closure) {
+            $item = new MenuItem();
+            $item = call_user_func($index, $item) ?? $item;
+        } elseif ($index instanceof MenuItem) {
+            $item = $index;
+        } else {
+            $item = new MenuItem($index, $text, $attributes);
+        }
+
+        $this->add($item);
+
+        return $item;
+    }
+
+    /**
+     * Add a Submenu.
+     *
+     * @param string|\Closure|Submenu|null $index
+     * @param string|null                  $title
+     * @param array                        $attributes
+     *
+     * @return Submenu|mixed|null
+     */
+    public function submenu($index = null, string $title = null, array $attributes = [])
+    {
+        if ($index instanceof \Closure) {
+            $submenu = new Submenu();
+            $submenu = call_user_func($index, $submenu) ?? $submenu;
+        } elseif ($index instanceof Submenu) {
+            $submenu = $index;
+        } else {
+            $submenu = new Submenu($index, $title, $attributes);
+        }
+
+        $this->add($submenu);
+
+        return $submenu;
     }
 }
