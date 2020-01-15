@@ -7,35 +7,12 @@
 namespace CodeSinging\ElementUiBuilder\Tests\Foundation;
 
 use CodeSinging\ElementUiBuilder\Foundation\Element;
-use CodeSinging\Support\Str;
 use PHPUnit\Framework\TestCase;
 
 class ElementTest extends TestCase
 {
-
-    public function testBuilderId()
+    public function testBuild()
     {
-        self::assertTrue(is_int((new Element())->builderId()));
-        self::assertTrue(Str::startsWith((new Element())->builderId('component'),'component_'));
-
+        self::assertEquals('<div></div>', new Element('div'));
     }
-
-    public function testConfig()
-    {
-        $element = new Element();
-        $element->config(['name' => 'demo']);
-
-        self::assertEquals('demo', $element->config('name'));
-    }
-
-    public function testBuildableAndIsBuildable()
-    {
-        $element = new Element();
-        self::assertTrue($element->isBuildable());
-        $element->buildable(false);
-        self::assertFalse($element->isBuildable());
-        $element->buildable(true);
-        self::assertTrue($element->isBuildable());
-    }
-
 }
