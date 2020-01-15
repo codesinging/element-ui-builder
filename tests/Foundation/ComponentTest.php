@@ -23,20 +23,6 @@ class ComponentTest extends TestCase
         self::assertEquals('example-tag', (new ExampleTagComponent())->baseTag());
     }
 
-    public function testCompId()
-    {
-        self::assertTrue(is_int((new Component())->compId()));
-        self::assertTrue(Str::startsWith((new Component())->compId('component'),'component_'));
-    }
-
-    public function testConfig()
-    {
-        $component = new Component();
-        $component->config(['name' => 'demo']);
-
-        self::assertEquals('demo', $component->config('name'));
-    }
-
     public function testBuild()
     {
         self::assertEquals('<el-component></el-component>', new Component());
