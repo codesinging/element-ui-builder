@@ -7,7 +7,6 @@
 namespace CodeSinging\ElementUiBuilder\Tests\Foundation;
 
 use CodeSinging\ElementUiBuilder\Foundation\Component;
-use CodeSinging\Support\Str;
 use PHPUnit\Framework\TestCase;
 
 class ComponentTest extends TestCase

@@ -13,14 +13,15 @@ class Element extends Builder
     /**
      * Element constructor.
      *
-     * @param string     $tag
-     * @param null       $content
-     * @param array|null $attributes
-     * @param bool       $closing
-     * @param bool       $lineBreak
+     * @param string        $tag
+     * @param null          $content
+     * @param array|null    $attributes
+     * @param bool          $closing
+     * @param bool          $lineBreak
+     * @param string|string $glue
      */
-    public function __construct(string $tag = 'div', $content = null, array $attributes = null, bool $closing = true, bool $lineBreak = false)
+    public function __construct(string $tag = 'div', $content = null, array $attributes = null, bool $closing = true, bool $lineBreak = false, $glue = '')
     {
-        parent::__construct($tag, $content, $attributes, $closing, $lineBreak);
+        parent::__construct($tag, $content, $attributes, $closing, $lineBreak, $glue);
     }
 }
