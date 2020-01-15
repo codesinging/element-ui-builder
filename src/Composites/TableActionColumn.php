@@ -44,9 +44,9 @@ class TableActionColumn extends TableColumn
      * @param null  $label
      * @param array $attributes
      */
-    public function __construct( $label = null, array $attributes = [])
+    public function __construct($label = null, array $attributes = [])
     {
-        if (is_array($label)){
+        if (is_array($label)) {
             parent::__construct($label);
         } else {
             parent::__construct(null, $label, $attributes);
@@ -77,6 +77,8 @@ class TableActionColumn extends TableColumn
 
     protected function __build()
     {
+        empty($this->get('label')) and $this->label('操作');
+
         $template = new Element(
             'template',
             $this->content->all(),

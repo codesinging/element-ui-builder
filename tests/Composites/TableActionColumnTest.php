@@ -17,7 +17,7 @@ class TableActionColumnTest extends TestCase
         $actionColumn = new TableActionColumn();
 
         self::assertEquals(
-            '<el-table-column align="center" class-name="table-column-action" width="240px">'
+            '<el-table-column align="center" class-name="table-column-action" width="240px" label="操作">'
             .PHP_EOL . '<template slot-scope="scope">'
             .PHP_EOL . '<el-button size="mini" @click="onItemEditClick(scope.row)" type="success">编辑</el-button>'
             .PHP_EOL . '<el-button size="mini" @click="onItemViewClick(scope.row)" type="primary">查看</el-button>'
@@ -34,7 +34,7 @@ class TableActionColumnTest extends TestCase
         $actionColumn->viewButton->buildable(false);
 
         self::assertEquals(
-            '<el-table-column align="center" class-name="table-column-action" width="240px">'
+            '<el-table-column align="center" class-name="table-column-action" width="240px" label="操作">'
             .PHP_EOL . '<template slot-scope="scope">'
             .PHP_EOL . '<el-button size="mini" @click="onItemEditClick(scope.row)" type="success">编辑</el-button>'
             .PHP_EOL . '<el-button size="mini" @click="onItemDeleteClick(scope.row)" :loading="statuses[\'delete_\' + scope.row.id]" type="danger">删除</el-button>'
@@ -46,11 +46,11 @@ class TableActionColumnTest extends TestCase
 
     public function testAddButton()
     {
-        $actionColumn = new TableActionColumn();
+        $actionColumn = new TableActionColumn('增加操作');
         $actionColumn->add(new Button('权限', 'info', ['size' => 'mini']));
 
         self::assertEquals(
-            '<el-table-column align="center" class-name="table-column-action" width="240px">'
+            '<el-table-column align="center" class-name="table-column-action" width="240px" label="增加操作">'
             .PHP_EOL . '<template slot-scope="scope">'
             .PHP_EOL . '<el-button size="mini" @click="onItemEditClick(scope.row)" type="success">编辑</el-button>'
             .PHP_EOL . '<el-button size="mini" @click="onItemViewClick(scope.row)" type="primary">查看</el-button>'
@@ -68,7 +68,7 @@ class TableActionColumnTest extends TestCase
         $actionColumn->prepend(new Button('权限', 'info', ['size' => 'mini']));
 
         self::assertEquals(
-            '<el-table-column align="center" class-name="table-column-action" width="240px">'
+            '<el-table-column align="center" class-name="table-column-action" width="240px" label="操作">'
             .PHP_EOL . '<template slot-scope="scope">'
             .PHP_EOL . '<el-button size="mini" type="info">权限</el-button>'
             .PHP_EOL . '<el-button size="mini" @click="onItemEditClick(scope.row)" type="success">编辑</el-button>'

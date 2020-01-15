@@ -7,6 +7,7 @@
 namespace CodeSinging\ElementUiBuilder\Components;
 
 use Closure;
+use CodeSinging\ElementUiBuilder\Composites\TableActionColumn;
 use CodeSinging\ElementUiBuilder\Foundation\Component;
 use CodeSinging\Support\Str;
 
@@ -63,7 +64,7 @@ class Table extends Component
      */
     public function __construct($data = null, array $attributes = [])
     {
-        if (is_array($data)){
+        if (is_array($data)) {
             parent::__construct($data);
         } else {
             parent::__construct($attributes);
@@ -226,6 +227,30 @@ class Table extends Component
     {
         return $this->column('update_time', $label ?: '更新时间', $props)
             ->set('align', TableColumn::ALIGN_CENTER);
+    }
+
+    /**
+     * Add a action column.
+     *
+     * @param null|string|array $label
+     * @param array             $attributes
+     *
+     * @return TableActionColumn|mixed
+     */
+    public function actionColumn($label = null, array $attributes = [])
+    {
+        if ($label instanceof Closure) {
+            $column = new TableActionColumn($attributes);
+            $column = call_user_func($label, $column) ?? $column;
+        } elseif ($label instanceof TableActionColumn) {
+            $column = $label->set($attributes);
+        } else {
+            $column = new TableActionColumn($label, $attributes);
+        }
+
+        $this->add($column);
+
+        return $column;
     }
 
     /**
