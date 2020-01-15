@@ -39,9 +39,9 @@ class TableActionColumn extends TableColumn
     public $deleteButton;
 
     /**
-     * ActionColumn constructor.
+     * TableActionColumn constructor.
      *
-     * @param null  $label
+     * @param null|array|string  $label
      * @param array $attributes
      */
     public function __construct($label = null, array $attributes = [])
