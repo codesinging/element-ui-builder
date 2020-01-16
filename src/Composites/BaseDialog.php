@@ -51,6 +51,12 @@ class BaseDialog extends Dialog
     public $zoomContainer;
 
     /**
+     * The action buttons container.
+     * @var Element
+     */
+    public $actionContainer;
+
+    /**
      * BaseDialog constructor.
      *
      * @param null|string $name
@@ -81,6 +87,9 @@ class BaseDialog extends Dialog
         return $this;
     }
 
+    /**
+     * Initialize.
+     */
     protected function __init()
     {
         parent::__init();
@@ -109,6 +118,15 @@ class BaseDialog extends Dialog
             true,
             true
         );
+
+        $this->actionContainer = new Element(
+            'div',
+            [$this->cancelButton, $this->confirmButton],
+            [],
+            true,
+            true,
+            true
+        );
     }
 
     /**
@@ -123,6 +141,9 @@ class BaseDialog extends Dialog
         return $this->name . ($key ? '.' . $key : '');
     }
 
+    /**
+     * Build
+     */
     protected function __build()
     {
         parent::__build();
@@ -140,7 +161,7 @@ class BaseDialog extends Dialog
 
         $footer = new Element(
             'div',
-            [$this->zoomContainer, $this->cancelButton, $this->confirmButton],
+            [$this->zoomContainer, $this->actionContainer],
             null,
             true,
             true,
