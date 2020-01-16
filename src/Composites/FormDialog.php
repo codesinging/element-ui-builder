@@ -23,11 +23,6 @@ class FormDialog extends BaseDialog
      */
     protected $autoCloseCheckbox;
 
-    public function __construct($name = null, string $title = null, string $sync = null, array $attributes = [])
-    {
-        parent::__construct($name, $title, $sync, $attributes);
-    }
-
     protected function __init()
     {
         parent::__init();
