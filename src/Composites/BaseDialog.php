@@ -152,11 +152,11 @@ class BaseDialog extends Dialog
 
         $this->cancelButton->vClickBind($this->storeKey('visible'), false);
 
-        $this->zoomOutButton->vClick(sprintf('onBaseDialogZoomOutClick(\'%s\')', $this->name))
+        $this->zoomOutButton->vClick(sprintf('onDialogZoomOutClick(\'%s\')', $this->name))
             ->set(':disabled', $this->storeKey('width>=100'));
 
         $this->zoomInButton
-            ->vClick(sprintf('onBaseDialogZoomInClick(\'%s\')', $this->name))
+            ->vClick(sprintf('onDialogZoomInClick(\'%s\')', $this->name))
             ->set(':disabled', $this->storeKey('width<=60'));
 
         $footer = new Element(
