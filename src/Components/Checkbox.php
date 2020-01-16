@@ -33,12 +33,11 @@ class Checkbox extends Component
     /**
      * Checkbox constructor.
      *
-     * @param string|array|null          $model
-     * @param string|int|float|bool|null $label
-     * @param string|null                $content
-     * @param array                      $attributes
+     * @param string|array|null $model
+     * @param string|null       $content
+     * @param array             $attributes
      */
-    public function __construct($model = null, string $label = null, string $content = null, array $attributes = [])
+    public function __construct($model = null, string $content = null, array $attributes = [])
     {
         if (is_array($model)) {
             parent::__construct($model);
@@ -46,7 +45,6 @@ class Checkbox extends Component
             parent::__construct($attributes);
             $model and $this->vModel($model);
             $this->add($content);
-            is_null($label) or $this->set('label', $label);
         }
     }
 }

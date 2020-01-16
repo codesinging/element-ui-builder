@@ -90,19 +90,20 @@ class CheckboxGroup extends Component
      *
      * @param string|array|Closure|Checkbox|null $label
      * @param string|null                        $content
-     * @param array                              $props
+     * @param array                              $attributes
      *
      * @return Checkbox
      */
-    public function checkbox($label = null, string $content = null, array $props = [])
+    public function checkbox($label = null, string $content = null, array $attributes = [])
     {
         if ($label instanceof Closure) {
-            $checkbox = new Checkbox(null, null, $content, $props);
+            $checkbox = new Checkbox(null, $content, $attributes);
             $checkbox = call_user_func($label, $checkbox) ?? $checkbox;
         } elseif ($label instanceof Checkbox) {
-            $checkbox = $label->add($content)->set($props);
+            $checkbox = $label->content($content)->set($attributes);
         } else {
-            $checkbox = new Checkbox(null, $label, $content, $props);
+            $checkbox = new Checkbox(null, $content, $attributes);
+            $checkbox->label($label);
         }
 
         $this->add($checkbox);
@@ -115,19 +116,19 @@ class CheckboxGroup extends Component
      *
      * @param string|array|Closure|CheckboxButton|null $label
      * @param string|null                              $content
-     * @param array                                    $props
+     * @param array                                    $attributes
      *
      * @return CheckboxButton
      */
-    public function checkboxButton($label = null, string $content = null, array $props = [])
+    public function checkboxButton($label = null, string $content = null, array $attributes = [])
     {
         if ($label instanceof Closure) {
-            $checkboxButton = new CheckboxButton(null, $content, $props);
+            $checkboxButton = new CheckboxButton(null, $content, $attributes);
             $checkboxButton = call_user_func($label, $checkboxButton) ?? $checkboxButton;
         } elseif ($label instanceof CheckboxButton) {
-            $checkboxButton = $label->add($content)->set($props);
+            $checkboxButton = $label->content($content)->set($attributes);
         } else {
-            $checkboxButton = new CheckboxButton($label, $content, $props);
+            $checkboxButton = new CheckboxButton($label, $content, $attributes);
         }
 
         $this->add($checkboxButton);
@@ -146,7 +147,7 @@ class CheckboxGroup extends Component
                 if ($this->isButton) {
                     $checkboxes[] = new CheckboxButton($option['label'], $option['content'] ?? null, $option['props'] ?? []);
                 } else {
-                    $checkboxes[] = new Checkbox(null, $option['label'], $option['content'] ?? null, $option['props'] ?? []);
+                    $checkboxes[] = (new Checkbox(null, $option['content'] ?? null, $option['props'] ?? []))->label($option['label']);
                 }
             }
         }
