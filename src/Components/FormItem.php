@@ -243,13 +243,9 @@ class FormItem extends Component
                 $rules['edit'] = $this->validation->rules();
             }
 
-            $name = $this->buildId('rules.rule');
+            $this->config(compact('rules'));
 
-            $this->store([
-                $name => $rules,
-            ]);
-
-            $this->set(':rules', $name.'[scene]');
+            $this->set(':rules', $this->configKey('[scene]'));
         }
     }
 }

@@ -402,7 +402,10 @@ class Table extends Component
 
         $column = $this->column($prop, $label)
             ->add($template)
-            ->set('class-name', 'table-column-tag');
+            ->set([
+                'class-name' => 'table-column-tag',
+                'align' => 'center',
+            ]);
 
         return $column;
     }
