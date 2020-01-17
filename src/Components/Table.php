@@ -446,6 +446,7 @@ class Table extends Component
             ->set([
                 'class-name' => 'table-column-switcher',
                 'align' => 'center',
+                'width' => '80px',
             ]);
 
         return $column;
