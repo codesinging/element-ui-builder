@@ -37,6 +37,7 @@ class FormDialog extends BaseDialog
 
     /**
      * Initialize the form.
+     *
      * @param string $name
      * @param string $model
      *
@@ -55,7 +56,8 @@ class FormDialog extends BaseDialog
     {
         parent::__build();
 
-        $this->form->ref($this->config('formName'));
+        $this->form->ref($this->config('formName'))
+            ->set(':model', $this->config('formModel'));
 
         $this->add($this->form);
 
