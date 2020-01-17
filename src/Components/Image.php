@@ -37,7 +37,7 @@ class Image extends Component
      * @param string|array|null $src
      * @param array             $attributes
      */
-    public function __construct($src = null, array $attributes = [])
+    public function __construct($src = null, array $attributes = null)
     {
         if (is_array($src)) {
             parent::__construct($src);

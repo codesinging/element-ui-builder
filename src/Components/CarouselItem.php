@@ -25,7 +25,7 @@ class CarouselItem extends Component
      * @param string|null $label
      * @param array       $attributes
      */
-    public function __construct( $name = null, string $label = null, array $attributes = [])
+    public function __construct( $name = null, string $label = null, array $attributes = null)
     {
         if (is_array($name)){
             parent::__construct($name);

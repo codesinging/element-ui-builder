@@ -34,7 +34,7 @@ class Transfer extends Component
      * @param string|null       $data
      * @param array             $attributes
      */
-    public function __construct($model = null, string $data = null, array $attributes = [])
+    public function __construct($model = null, string $data = null, array $attributes = null)
     {
         if (is_array($model)) {
             parent::__construct($model);

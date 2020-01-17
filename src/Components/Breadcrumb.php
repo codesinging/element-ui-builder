@@ -24,7 +24,7 @@ class Breadcrumb extends Component
      *
      * @param array $attributes
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = null)
     {
         parent::__construct($attributes);
         $this->lineBreak()->glue();
@@ -39,7 +39,7 @@ class Breadcrumb extends Component
      *
      * @return BreadcrumbItem
      */
-    public function item($text = null, string $url = null, array $attributes = [])
+    public function item($text = null, string $url = null, array $attributes = null)
     {
         if ($text instanceof Closure) {
             $item = new BreadcrumbItem();

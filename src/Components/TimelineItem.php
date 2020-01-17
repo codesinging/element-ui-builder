@@ -45,7 +45,7 @@ class TimelineItem extends Component
      * @param string|null       $content
      * @param array             $attributes
      */
-    public function __construct($timestamp = null, string $content = null, array $attributes = [])
+    public function __construct($timestamp = null, string $content = null, array $attributes = null)
     {
         if (is_array($timestamp)) {
             parent::__construct($timestamp);

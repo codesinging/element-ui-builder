@@ -63,7 +63,7 @@ class Table extends Component
      * @param string|array|null $data
      * @param array             $attributes
      */
-    public function __construct($data = null, array $attributes = [])
+    public function __construct($data = null, array $attributes = null)
     {
         if (is_array($data)) {
             parent::__construct($data);
@@ -100,7 +100,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function column($prop = null, string $label = null, array $attributes = [])
+    public function column($prop = null, string $label = null, array $attributes = null)
     {
         if ($prop instanceof Closure) {
             $column = new TableColumn();
@@ -123,7 +123,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function selectionColumn(array $attributes = [])
+    public function selectionColumn(array $attributes = null)
     {
         return $this->column()
             ->set($attributes)
@@ -142,7 +142,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function indexColumn(string $label = '#', array $attributes = [])
+    public function indexColumn(string $label = '#', array $attributes = null)
     {
         return $this->column(null, $label)
             ->set($attributes)
@@ -161,7 +161,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function expandColumn(string $label = null, array $attributes = [])
+    public function expandColumn(string $label = null, array $attributes = null)
     {
         return $this->column(null, $label)
             ->set($attributes)
@@ -180,7 +180,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function idColumn(string $label = null, array $attributes = [])
+    public function idColumn(string $label = null, array $attributes = null)
     {
         return $this->column('id', $label ?: 'Id', $attributes)
             ->set([
@@ -197,7 +197,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function nameColumn(string $label = '', array $attributes = [])
+    public function nameColumn(string $label = '', array $attributes = null)
     {
         return $this->column('name', $label ?: '名称', $attributes);
     }
@@ -210,7 +210,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function createTimeColumn(string $label = '', array $attributes = [])
+    public function createTimeColumn(string $label = '', array $attributes = null)
     {
         return $this->column('create_time', $label ?: '创建时间', $attributes)
             ->set('align', TableColumn::ALIGN_CENTER);
@@ -224,7 +224,7 @@ class Table extends Component
      *
      * @return TableColumn
      */
-    public function updateTimeColumn(string $label = '', array $attributes = [])
+    public function updateTimeColumn(string $label = '', array $attributes = null)
     {
         return $this->column('update_time', $label ?: '更新时间', $attributes)
             ->set('align', TableColumn::ALIGN_CENTER);
@@ -238,7 +238,7 @@ class Table extends Component
      *
      * @return TableActionColumn
      */
-    public function actionColumn($label = null, array $attributes = [])
+    public function actionColumn($label = null, array $attributes = null)
     {
         if ($label instanceof Closure) {
             $column = new TableActionColumn($attributes);
@@ -464,9 +464,9 @@ class Table extends Component
         if (Str::endsWith($name, 'Column')) {
             $name = Str::snake(Str::beforeLast($name, 'Column'));
             return $this->column($name, $arguments[0] ?? Str::studly($name), $arguments[1] ?? []);
-        } else {
+        }
+
             parent::__call($name, $arguments);
             return $this;
-        }
     }
 }

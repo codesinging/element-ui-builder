@@ -23,7 +23,7 @@ class Container extends Component
      *
      * @param array $attributes
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = null)
     {
         parent::__construct($attributes);
         $this->lineBreak()->glue();
@@ -60,7 +60,7 @@ class Container extends Component
      *
      * @return Header
      */
-    public function header($height = null, array $attributes = [])
+    public function header($height = null, array $attributes = null)
     {
         if ($height instanceof Closure) {
             $header = new Header();
@@ -84,7 +84,7 @@ class Container extends Component
      *
      * @return Footer
      */
-    public function footer($height = null, array $attributes = [])
+    public function footer($height = null, array $attributes = null)
     {
         if ($height instanceof Closure) {
             $footer = new Footer();
@@ -108,7 +108,7 @@ class Container extends Component
      *
      * @return Aside
      */
-    public function aside($width = null, array $attributes = [])
+    public function aside($width = null, array $attributes = null)
     {
         if ($width instanceof Closure) {
             $aside = new Aside();

@@ -32,7 +32,7 @@ class PopConfirm extends Component
      * @param string|array|null $title
      * @param array             $attributes
      */
-    public function __construct($title = null, array $attributes = [])
+    public function __construct($title = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

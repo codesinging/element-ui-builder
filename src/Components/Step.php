@@ -34,7 +34,7 @@ class Step extends Component
      * @param string|null       $description
      * @param array             $attributes
      */
-    public function __construct($title = null, string $description = null, array $attributes = [])
+    public function __construct($title = null, string $description = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

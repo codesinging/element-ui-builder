@@ -46,7 +46,7 @@ class Tree extends Component
      * @param string|array|null $data
      * @param array             $attributes
      */
-    public function __construct($data = null, array $attributes = [])
+    public function __construct($data = null, array $attributes = null)
     {
         if (is_array($data)) {
             parent::__construct($data);

@@ -64,7 +64,7 @@ class BaseDialog extends Dialog
      * @param string|null $sync
      * @param array       $attributes
      */
-    public function __construct($name = null, $title = null, string $sync = null, array $attributes = [])
+    public function __construct($name = null, $title = null, string $sync = null, array $attributes = null)
     {
         if (is_array($name)) {
             parent::__construct($name);

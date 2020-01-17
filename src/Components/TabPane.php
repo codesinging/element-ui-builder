@@ -28,7 +28,7 @@ class TabPane extends Component
      * @param string|null       $name
      * @param array             $attributes
      */
-    public function __construct($label = null, string $name = null, array $attributes = [])
+    public function __construct($label = null, string $name = null, array $attributes = null)
     {
         if (is_array($label)) {
             parent::__construct($label);

@@ -36,7 +36,7 @@ class Submenu extends Component
      * @param string|null       $title
      * @param array             $attributes
      */
-    public function __construct($index = null, string $title = null, array $attributes = [])
+    public function __construct($index = null, string $title = null, array $attributes = null)
     {
         if (is_array($index)) {
             parent::__construct($index);
@@ -64,7 +64,7 @@ class Submenu extends Component
      *
      * @return MenuItemGroup
      */
-    public function menuItemGroup($title = null, array $attributes = [])
+    public function menuItemGroup($title = null, array $attributes = null)
     {
         if ($title instanceof \Closure) {
             $group = new MenuItemGroup();
@@ -89,7 +89,7 @@ class Submenu extends Component
      *
      * @return MenuItem
      */
-    public function menuItem($index = null, string $text = null, array $attributes = [])
+    public function menuItem($index = null, string $text = null, array $attributes = null)
     {
         if ($index instanceof \Closure) {
             $item = new MenuItem();
@@ -114,7 +114,7 @@ class Submenu extends Component
      *
      * @return Submenu|mixed|null
      */
-    public function submenu($index = null, string $title = null, array $attributes = [])
+    public function submenu($index = null, string $title = null, array $attributes = null)
     {
         if ($index instanceof \Closure) {
             $submenu = new Submenu();

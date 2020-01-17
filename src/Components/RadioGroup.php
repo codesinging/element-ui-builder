@@ -44,7 +44,7 @@ class RadioGroup extends Component
      * @param array             $options
      * @param array             $attributes
      */
-    public function __construct($model = null, array $options = [], array $attributes = [])
+    public function __construct($model = null, array $options = [], array $attributes = null)
     {
         if (is_array($model)) {
             parent::__construct($model);
@@ -91,7 +91,7 @@ class RadioGroup extends Component
      *
      * @return Radio
      */
-    public function radio($label = null, string $content = null, array $attributes = [])
+    public function radio($label = null, string $content = null, array $attributes = null)
     {
         if ($label instanceof \Closure) {
             $radio = new Radio(null, null, $content, $attributes);
@@ -116,7 +116,7 @@ class RadioGroup extends Component
      *
      * @return RadioButton
      */
-    public function radioButton($label = null, string $content = null, array $attributes = [])
+    public function radioButton($label = null, string $content = null, array $attributes = null)
     {
         if ($label instanceof \Closure) {
             $radioButton = new RadioButton(null, $content, $attributes);

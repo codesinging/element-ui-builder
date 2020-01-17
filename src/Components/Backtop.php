@@ -26,7 +26,7 @@ class Backtop extends Component
      * @param string|array|null $target
      * @param array             $attributes
      */
-    public function __construct($target = null, array $attributes = [])
+    public function __construct($target = null, array $attributes = null)
     {
         if (is_array($target)) {
             parent::__construct($target);

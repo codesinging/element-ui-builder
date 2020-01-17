@@ -45,19 +45,14 @@ class FormDialog extends BaseDialog
      */
     public function initForm(string $name, string $model)
     {
-        $this->config([
-            'formName' => $name,
-            'formModel' => $model,
-        ]);
+        $this->form->ref($name)
+            ->set(':model', $model);
         return $this;
     }
 
     protected function __build()
     {
         parent::__build();
-
-        $this->form->ref($this->config('formName'))
-            ->set(':model', $this->config('formModel'));
 
         $this->add($this->form);
 

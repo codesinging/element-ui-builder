@@ -34,7 +34,7 @@ class Radio extends Component
      * @param string|null                $content
      * @param array                      $attributes
      */
-    public function __construct($model = null, $label = null, string $content = null, array $attributes = [])
+    public function __construct($model = null, $label = null, string $content = null, array $attributes = null)
     {
         if (is_array($model)) {
             parent::__construct($model);

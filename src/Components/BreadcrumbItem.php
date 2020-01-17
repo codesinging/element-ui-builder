@@ -38,7 +38,7 @@ class BreadcrumbItem extends Component
      * @param string|null       $url
      * @param array             $attributes
      */
-    public function __construct($text = null, string $url = null, array $attributes = [])
+    public function __construct($text = null, string $url = null, array $attributes = null)
     {
         if (is_array($text)) {
             parent::__construct($text);

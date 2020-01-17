@@ -26,7 +26,7 @@ class MenuItem extends Component
      * @param string|null $text
      * @param array       $attributes
      */
-    public function __construct( $index = null, string $text = null, array $attributes = [])
+    public function __construct( $index = null, string $text = null, array $attributes = null)
     {
         if (is_array($index)){
             parent::__construct($index);

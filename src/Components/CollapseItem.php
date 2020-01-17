@@ -26,7 +26,7 @@ class CollapseItem extends Component
      * @param string|null       $name
      * @param array             $attributes
      */
-    public function __construct($title = null, string $name = null, array $attributes = [])
+    public function __construct($title = null, string $name = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

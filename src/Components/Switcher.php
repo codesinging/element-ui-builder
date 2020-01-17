@@ -40,7 +40,7 @@ class Switcher extends Component
      * @param string|array|null $model
      * @param array       $attributes
      */
-    public function __construct( $model = null, array $attributes = [])
+    public function __construct( $model = null, array $attributes = null)
     {
         if (is_array($model)){
             parent::__construct($model);

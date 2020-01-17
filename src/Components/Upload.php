@@ -20,7 +20,7 @@ class Upload extends Component
      *
      * @param array $attributes
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = null)
     {
         parent::__construct($attributes);
         $this->lineBreak()->glue();

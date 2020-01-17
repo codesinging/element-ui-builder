@@ -39,7 +39,7 @@ class Dialog extends Component
      * @param string|null       $sync
      * @param array             $attributes
      */
-    public function __construct($title = null, string $sync = null, array $attributes = [])
+    public function __construct($title = null, string $sync = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

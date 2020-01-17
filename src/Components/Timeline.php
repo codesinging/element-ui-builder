@@ -23,7 +23,7 @@ class Timeline extends Component
      * @param bool|array|null $reverse
      * @param array           $attributes
      */
-    public function __construct($reverse = null, array $attributes = [])
+    public function __construct($reverse = null, array $attributes = null)
     {
         if (is_array($reverse)) {
             parent::__construct($reverse);

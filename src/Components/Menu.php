@@ -40,7 +40,7 @@ class Menu extends Component
      *
      * @param array $attributes
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = null)
     {
         parent::__construct($attributes);
         $this->lineBreak()->glue();
@@ -54,7 +54,7 @@ class Menu extends Component
      *
      * @return MenuItemGroup
      */
-    public function menuItemGroup($title = null, array $attributes = [])
+    public function menuItemGroup($title = null, array $attributes = null)
     {
         if ($title instanceof \Closure) {
             $group = new MenuItemGroup();
@@ -79,7 +79,7 @@ class Menu extends Component
      *
      * @return MenuItem
      */
-    public function menuItem($index = null, string $text = null, array $attributes = [])
+    public function menuItem($index = null, string $text = null, array $attributes = null)
     {
         if ($index instanceof \Closure) {
             $item = new MenuItem();
@@ -104,7 +104,7 @@ class Menu extends Component
      *
      * @return Submenu|mixed|null
      */
-    public function submenu($index = null, string $title = null, array $attributes = [])
+    public function submenu($index = null, string $title = null, array $attributes = null)
     {
         if ($index instanceof \Closure) {
             $submenu = new Submenu();

@@ -41,7 +41,7 @@ class Alert extends Component
      * @param string|null       $type
      * @param array             $attributes
      */
-    public function __construct($title = null, string $type = null, array $attributes = [])
+    public function __construct($title = null, string $type = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

@@ -29,7 +29,7 @@ class CheckboxButton extends Component
      * @param string|null                      $content
      * @param array                            $attributes
      */
-    public function __construct($label = null, string $content = null, array $attributes = [])
+    public function __construct($label = null, string $content = null, array $attributes = null)
     {
         if (is_array($label)) {
             parent::__construct($label);

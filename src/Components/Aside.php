@@ -20,7 +20,7 @@ class Aside extends Component
      * @param string|null $width
      * @param array       $attributes
      */
-    public function __construct($width = null, array $attributes = [])
+    public function __construct($width = null, array $attributes = null)
     {
         if (is_array($width)) {
             parent::__construct($width);

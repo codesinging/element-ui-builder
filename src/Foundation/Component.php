@@ -27,7 +27,7 @@ class Component extends Element
      *
      * @param array $attributes
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = null)
     {
         parent::__construct($this->tagPrefix . $this->baseTag(), null, $attributes, true, false);
     }

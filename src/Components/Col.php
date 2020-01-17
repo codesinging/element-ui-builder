@@ -32,7 +32,7 @@ class Col extends Component
      * @param int            $offset
      * @param array          $attributes
      */
-    public function __construct($span = null, int $offset = null, array $attributes = [])
+    public function __construct($span = null, int $offset = null, array $attributes = null)
     {
         if (is_array($span)) {
             parent::__construct($span);

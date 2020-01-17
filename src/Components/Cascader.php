@@ -22,7 +22,7 @@ class Cascader extends Component
      * @param string|null       $options
      * @param array             $attributes
      */
-    public function __construct($model = null, string $options = null, array $attributes = [])
+    public function __construct($model = null, string $options = null, array $attributes = null)
     {
         if (is_array($model)) {
             parent::__construct($model);

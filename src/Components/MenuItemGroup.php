@@ -23,7 +23,7 @@ class MenuItemGroup extends Component
      * @param string|array|null $title
      * @param array             $attributes
      */
-    public function __construct($title = null, array $attributes = [])
+    public function __construct($title = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);
@@ -43,7 +43,7 @@ class MenuItemGroup extends Component
      *
      * @return MenuItem
      */
-    public function menuItem($index = null, string $text = null, array $attributes = [])
+    public function menuItem($index = null, string $text = null, array $attributes = null)
     {
         if ($index instanceof \Closure) {
             $item = new MenuItem();
@@ -68,7 +68,7 @@ class MenuItemGroup extends Component
      *
      * @return Submenu|mixed|null
      */
-    public function submenu($index = null, string $title = null, array $attributes = [])
+    public function submenu($index = null, string $title = null, array $attributes = null)
     {
         if ($index instanceof \Closure) {
             $submenu = new Submenu();

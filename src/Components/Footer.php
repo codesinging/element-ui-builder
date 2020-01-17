@@ -20,7 +20,7 @@ class Footer extends Component
      * @param string|int|array|null $height
      * @param array                 $attributes
      */
-    public function __construct($height = null, array $attributes = [])
+    public function __construct($height = null, array $attributes = null)
     {
         if (is_array($height)) {
             parent::__construct($height);

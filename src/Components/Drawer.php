@@ -42,7 +42,7 @@ class Drawer extends Component
      * @param string|array|null $visibleSync
      * @param array             $attributes
      */
-    public function __construct($visibleSync = null, array $attributes = [])
+    public function __construct($visibleSync = null, array $attributes = null)
     {
         if (is_array($visibleSync)) {
             parent::__construct($visibleSync);

@@ -24,7 +24,7 @@ class OptionGroup extends Component
      * @param string|array|null $label
      * @param array             $attributes
      */
-    public function __construct($label = null, array $attributes = [])
+    public function __construct($label = null, array $attributes = null)
     {
         if (is_array($label)) {
             parent::__construct($label);
@@ -44,7 +44,7 @@ class OptionGroup extends Component
      *
      * @return Option
      */
-    public function option($value = null, $label = null, array $attributes = [])
+    public function option($value = null, $label = null, array $attributes = null)
     {
         if ($value instanceof \Closure) {
             $option = new Option();

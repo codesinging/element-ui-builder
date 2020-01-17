@@ -47,7 +47,7 @@ class CheckboxGroup extends Component
      * @param array             $options
      * @param array             $attributes
      */
-    public function __construct($model = null, array $options = [], array $attributes = [])
+    public function __construct($model = null, array $options = [], array $attributes = null)
     {
         if (is_array($model)) {
             parent::__construct($model);
@@ -94,7 +94,7 @@ class CheckboxGroup extends Component
      *
      * @return Checkbox
      */
-    public function checkbox($label = null, string $content = null, array $attributes = [])
+    public function checkbox($label = null, string $content = null, array $attributes = null)
     {
         if ($label instanceof Closure) {
             $checkbox = new Checkbox(null, $content, $attributes);
@@ -120,7 +120,7 @@ class CheckboxGroup extends Component
      *
      * @return CheckboxButton
      */
-    public function checkboxButton($label = null, string $content = null, array $attributes = [])
+    public function checkboxButton($label = null, string $content = null, array $attributes = null)
     {
         if ($label instanceof Closure) {
             $checkboxButton = new CheckboxButton(null, $content, $attributes);

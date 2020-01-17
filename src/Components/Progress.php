@@ -46,7 +46,7 @@ class Progress extends Component
      * @param int|array|null $percentage
      * @param array          $attributes
      */
-    public function __construct($percentage = null, array $attributes = [])
+    public function __construct($percentage = null, array $attributes = null)
     {
         if (is_array($percentage)) {
             parent::__construct($percentage);

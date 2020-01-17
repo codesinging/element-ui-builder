@@ -59,7 +59,7 @@ class Select extends Component
      * @param array       $options
      * @param array       $attributes
      */
-    public function __construct( $model = null, array $options = [], array $attributes = [])
+    public function __construct( $model = null, array $options = [], array $attributes = null)
     {
         if (is_array($model)){
             parent::__construct($model);

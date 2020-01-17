@@ -47,7 +47,7 @@ class Input extends Component
      * @param string|null $model
      * @param array       $attributes
      */
-    public function __construct($model = null, array $attributes = [])
+    public function __construct($model = null, array $attributes = null)
     {
         if (is_array($model)) {
             parent::__construct($model);

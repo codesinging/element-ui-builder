@@ -56,7 +56,7 @@ class Popover extends Component
      * @param string|null       $message
      * @param array             $attributes
      */
-    public function __construct($title = null, string $message = null, array $attributes = [])
+    public function __construct($title = null, string $message = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

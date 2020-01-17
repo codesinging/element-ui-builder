@@ -46,7 +46,7 @@ class Tag extends Component
      * @param string|null       $type
      * @param array             $attributes
      */
-    public function __construct($text = null, string $type = null, array $attributes = [])
+    public function __construct($text = null, string $type = null, array $attributes = null)
     {
         if (is_array($text)) {
             parent::__construct($text);

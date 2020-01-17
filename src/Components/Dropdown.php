@@ -62,7 +62,7 @@ class Dropdown extends Component
      * @param string|array|null $content
      * @param array             $attributes
      */
-    public function __construct($content = null, array $attributes = [])
+    public function __construct($content = null, array $attributes = null)
     {
         if (is_array($content)) {
             parent::__construct($content);

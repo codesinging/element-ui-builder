@@ -26,7 +26,7 @@ class DropdownItem extends Component
      * @param string|array|null $text
      * @param array             $attributes
      */
-    public function __construct($text = null, array $attributes = [])
+    public function __construct($text = null, array $attributes = null)
     {
         if (is_array($text)) {
             parent::__construct($text);

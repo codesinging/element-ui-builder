@@ -62,7 +62,7 @@ class TableColumn extends Component
      * @param string|null       $label
      * @param array             $attributes
      */
-    public function __construct($prop = null, string $label = null, array $attributes = [])
+    public function __construct($prop = null, string $label = null, array $attributes = null)
     {
         if (is_array($prop)) {
             parent::__construct($prop);

@@ -34,7 +34,7 @@ class Badge extends Component
      * @param string|int|array|null $value
      * @param array                 $attributes
      */
-    public function __construct($value = null, array $attributes = [])
+    public function __construct($value = null, array $attributes = null)
     {
         if (is_array($value)) {
             parent::__construct($value);

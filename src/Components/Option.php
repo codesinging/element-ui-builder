@@ -26,7 +26,7 @@ class Option extends Component
      * @param string|int|float|null       $label
      * @param array                       $attributes
      */
-    public function __construct($value = null, $label = null, array $attributes = [])
+    public function __construct($value = null, $label = null, array $attributes = null)
     {
         if (is_array($value)) {
             parent::__construct($value);

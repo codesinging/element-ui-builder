@@ -25,7 +25,7 @@ class PageHeader extends Component
      * @param string|null       $content
      * @param array             $attributes
      */
-    public function __construct($title = null, string $content = null, array $attributes = [])
+    public function __construct($title = null, string $content = null, array $attributes = null)
     {
         if (is_array($title)) {
             parent::__construct($title);

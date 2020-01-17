@@ -44,7 +44,7 @@ class TableActionColumn extends TableColumn
      * @param null|array|string  $label
      * @param array $attributes
      */
-    public function __construct($label = null, array $attributes = [])
+    public function __construct($label = null, array $attributes = null)
     {
         if (is_array($label)) {
             parent::__construct($label);
