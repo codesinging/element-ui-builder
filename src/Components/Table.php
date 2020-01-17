@@ -8,6 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Components;
 
 use Closure;
 use CodeSinging\ElementUiBuilder\Composites\TableActionColumn;
+use CodeSinging\ElementUiBuilder\Elements\SlotScopeTemplate;
 use CodeSinging\ElementUiBuilder\Foundation\Component;
 use CodeSinging\Support\Str;
 
@@ -95,11 +96,11 @@ class Table extends Component
      *
      * @param string|Closure|TableColumn|null $prop
      * @param string|null                     $label
-     * @param array                           $props
+     * @param array                           $attributes
      *
      * @return TableColumn
      */
-    public function column($prop = null, string $label = null, array $props = [])
+    public function column($prop = null, string $label = null, array $attributes = [])
     {
         if ($prop instanceof Closure) {
             $column = new TableColumn();
@@ -107,7 +108,7 @@ class Table extends Component
         } elseif ($prop instanceof TableColumn) {
             $column = $prop;
         } else {
-            $column = new TableColumn($prop, $label, $props);
+            $column = new TableColumn($prop, $label, $attributes);
         }
 
         $this->add($column);
@@ -118,14 +119,14 @@ class Table extends Component
     /**
      * Add a `selection` type column.
      *
-     * @param array $props
+     * @param array $attributes
      *
      * @return TableColumn
      */
-    public function selection(array $props = [])
+    public function selectionColumn(array $attributes = [])
     {
         return $this->column()
-            ->set($props)
+            ->set($attributes)
             ->set([
                 'type' => TableColumn::TYPE_SELECTION,
                 'align' => TableColumn::ALIGN_CENTER,
@@ -137,14 +138,14 @@ class Table extends Component
      * Add a `index` type column.
      *
      * @param string|null $label
-     * @param array       $props
+     * @param array       $attributes
      *
      * @return TableColumn
      */
-    public function index(string $label = '#', array $props = [])
+    public function indexColumn(string $label = '#', array $attributes = [])
     {
         return $this->column(null, $label)
-            ->set($props)
+            ->set($attributes)
             ->set([
                 'type' => TableColumn::TYPE_INDEX,
                 'align' => TableColumn::ALIGN_CENTER,
@@ -156,14 +157,14 @@ class Table extends Component
      * Add a `expand` type column.
      *
      * @param string|null $label
-     * @param array       $props
+     * @param array       $attributes
      *
      * @return TableColumn
      */
-    public function expand(string $label = null, array $props = [])
+    public function expandColumn(string $label = null, array $attributes = [])
     {
         return $this->column(null, $label)
-            ->set($props)
+            ->set($attributes)
             ->set([
                 'type' => TableColumn::TYPE_EXPAND,
                 'align' => TableColumn::ALIGN_CENTER,
@@ -175,13 +176,13 @@ class Table extends Component
      * Add a table column with prop 'id'.
      *
      * @param string|null $label
-     * @param array       $props
+     * @param array       $attributes
      *
      * @return TableColumn
      */
-    public function id(string $label = null, array $props = [])
+    public function idColumn(string $label = null, array $attributes = [])
     {
-        return $this->column('id', $label ?: 'Id', $props)
+        return $this->column('id', $label ?: 'Id', $attributes)
             ->set([
                 'align' => TableColumn::ALIGN_CENTER,
                 'width' => '80px',
@@ -192,26 +193,26 @@ class Table extends Component
      * Add a TableColumn with prop `name`.
      *
      * @param string $label
-     * @param array  $props
+     * @param array  $attributes
      *
      * @return TableColumn
      */
-    public function name(string $label = '', array $props = [])
+    public function nameColumn(string $label = '', array $attributes = [])
     {
-        return $this->column('name', $label ?: '名称', $props);
+        return $this->column('name', $label ?: '名称', $attributes);
     }
 
     /**
      * Add a TableColumn with prop `create_time`.
      *
      * @param string $label
-     * @param array  $props
+     * @param array  $attributes
      *
      * @return TableColumn
      */
-    public function createTime(string $label = '', array $props = [])
+    public function createTimeColumn(string $label = '', array $attributes = [])
     {
-        return $this->column('create_time', $label ?: '创建时间', $props)
+        return $this->column('create_time', $label ?: '创建时间', $attributes)
             ->set('align', TableColumn::ALIGN_CENTER);
     }
 
@@ -219,13 +220,13 @@ class Table extends Component
      * Add a TableColumn with prop `update_time`.
      *
      * @param string $label
-     * @param array  $props
+     * @param array  $attributes
      *
      * @return TableColumn
      */
-    public function updateTime(string $label = '', array $props = [])
+    public function updateTimeColumn(string $label = '', array $attributes = [])
     {
-        return $this->column('update_time', $label ?: '更新时间', $props)
+        return $this->column('update_time', $label ?: '更新时间', $attributes)
             ->set('align', TableColumn::ALIGN_CENTER);
     }
 
@@ -235,7 +236,7 @@ class Table extends Component
      * @param null|string|array $label
      * @param array             $attributes
      *
-     * @return TableActionColumn|mixed
+     * @return TableActionColumn
      */
     public function actionColumn($label = null, array $attributes = [])
     {
@@ -254,15 +255,215 @@ class Table extends Component
     }
 
     /**
-     * The magic method to add a TableColumn.
+     * Add an input column
+     *
+     * @param string                   $prop
+     * @param string|null              $label
+     * @param null|array|Closure|Input $input
+     *
+     * @return TableColumn
+     */
+    public function inputColumn(string $prop, string $label = null, $input = null)
+    {
+        $component = new Input();
+
+        if (is_array($input)) {
+            $component->set($input);
+        } elseif ($input instanceof Closure) {
+            $component = $input($component) ?? $component;
+        } elseif ($input instanceof Input) {
+            $component = $input;
+        }
+
+        $component->vModel('scope.row.' . $prop)
+            ->set([
+                'size' => 'mini',
+                'v-loading' => 'statuses[scope.column.id+\'_\'+scope.row.id]',
+                '@change' => 'onTableColumnChange(scope)',
+            ]);
+
+        $template = new SlotScopeTemplate($component);
+
+        $column = $this->column($prop, $label)
+            ->add($template)
+            ->set('class-name', 'table-column-input');
+
+        return $column;
+    }
+
+    /**
+     * Add an InputNumber column
+     *
+     * @param string                         $prop
+     * @param string|null                    $label
+     * @param null|array|Closure|InputNumber $inputNumber
+     *
+     * @return TableColumn
+     */
+    public function inputNumberColumn(string $prop, string $label = null, $inputNumber = null)
+    {
+        $component = new InputNumber();
+
+        if (is_array($inputNumber)) {
+            $component->set($inputNumber);
+        } elseif ($inputNumber instanceof Closure) {
+            $component = $inputNumber($component) ?? $component;
+        } elseif ($inputNumber instanceof Input) {
+            $component = $inputNumber;
+        }
+
+        $component->vModel('scope.row.' . $prop)
+            ->set([
+                'size' => 'mini',
+                'v-loading' => 'statuses[scope.column.id+\'_\'+scope.row.id]',
+                '@change' => 'onTableColumnChange(scope)',
+            ]);
+
+        $template = new SlotScopeTemplate($component);
+
+        $column = $this->column($prop, $label)
+            ->add($template)
+            ->set([
+                'class-name' => 'table-column-input',
+                'align' => 'center',
+                'width' => '160px',
+            ]);
+
+        return $column;
+    }
+
+    /**
+     * Add a tag status
+     *
+     * @param string                        $prop
+     * @param string|null                   $label
+     * @param null|string|array|Closure|Tag $tag
+     *
+     * @return TableColumn
+     */
+    public function tagColumn(string $prop, string $label = null, $tag = null)
+    {
+        $component = new Tag();
+
+        if (is_string($tag)) {
+            $component->type($tag);
+        } elseif (is_array($tag)) {
+            $component->set($tag);
+        } elseif ($tag instanceof Closure) {
+            $component = $tag($component) ?? $component;
+        } elseif ($tag instanceof Tag) {
+            $component = $tag;
+        }
+
+        $component->interpolation('scope.row.' . $prop)
+            ->set(['size' => 'medium']);
+
+        $template = new SlotScopeTemplate($component);
+
+        $column = $this->column($prop, $label)
+            ->add($template)
+            ->set('class-name', 'table-column-tag');
+
+        return $column;
+    }
+
+    /**
+     * Add a status column
+     *
+     * @param string            $prop
+     * @param string|null       $label
+     * @param array             $texts
+     * @param array             $types
+     * @param array|Closure|Tag $tag
+     *
+     * @return TableColumn
+     */
+    public function statusColumn(string $prop, string $label = null, array $texts = [], array $types = [], $tag = null)
+    {
+        $texts = $texts ?: [0 => '禁用', 1 => '正常'];
+        $types = $types ?: [0 => 'danger', 1 => 'success'];
+
+        $component = new Tag();
+
+        if (is_array($tag)) {
+            $component->set($tag);
+        } elseif ($tag instanceof Closure) {
+            $component = $tag($component) ?? $component;
+        } elseif ($tag instanceof Tag) {
+            $component = $tag;
+        }
+
+        $component->config(compact('texts', 'types'))
+            ->interpolation($component->configKey('texts[scope.row.' . $prop . ']'))
+            ->set(':type', $component->configKey('types[scope.row.' . $prop . ']'))
+            ->set('size', 'medium');
+
+        $template = new SlotScopeTemplate($component);
+
+        $column = $this->column($prop, $label)
+            ->add($template)
+            ->set('class-name', 'table-column-tag');
+
+        return $column;
+    }
+
+    /**
+     * Add a switcher column.
+     *
+     * @param string                      $prop
+     * @param string                      $label
+     * @param null|array|Closure|Switcher $switcher
+     *
+     * @return TableColumn
+     */
+    public function switcherColumn(string $prop, string $label, $switcher = null)
+    {
+        $component = new Switcher();
+
+        if (is_array($switcher)) {
+            $component->set($switcher);
+        } elseif ($switcher instanceof Closure) {
+            $component = $switcher($component) ?? $component;
+        } elseif ($switcher instanceof Switcher) {
+            $component = $switcher;
+        }
+
+        $component->vModel('scope.row.' . $prop)
+            ->set([
+                'active-value' => 1,
+                'inactive-value' => 0,
+                'v-loading' => 'statuses[scope.column.id+\'_\'+scope.row.id]',
+                '@change' => 'onTableColumnChange(scope)',
+            ]);
+
+        $template = new SlotScopeTemplate($component);
+
+        $column = $this->column($prop, $label)
+            ->add($template)
+            ->set([
+                'class-name' => 'table-column-switcher',
+                'align' => 'center',
+            ]);
+
+        return $column;
+    }
+
+    /**
+     * The magic method to set attributes or add a TableColumn.
      *
      * @param string $name
      * @param array  $arguments $arguments[0]: `label`, $argument[1]: props.
      *
-     * @return TableColumn
+     * @return Table|TableColumn
      */
     public function __call($name, $arguments)
     {
-        return $this->column($name, $arguments[0] ?? Str::studly($name), $arguments[1] ?? []);
+        if (Str::endsWith($name, 'Column')) {
+            $name = Str::snake(Str::beforeLast($name, 'Column'));
+            return $this->column($name, $arguments[0] ?? Str::studly($name), $arguments[1] ?? []);
+        } else {
+            parent::__call($name, $arguments);
+            return $this;
+        }
     }
 }

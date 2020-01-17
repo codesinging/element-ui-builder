@@ -8,6 +8,7 @@ namespace CodeSinging\ElementUiBuilder\Tests\Components;
 
 use CodeSinging\ElementUiBuilder\Components\Table;
 use CodeSinging\ElementUiBuilder\Components\TableColumn;
+use CodeSinging\ElementUiBuilder\Components\Tag;
 use PHPUnit\Framework\TestCase;
 
 class TableTest extends TestCase
@@ -15,6 +16,11 @@ class TableTest extends TestCase
     public function testBuild()
     {
         self::assertEquals('<el-table>' . PHP_EOL . '</el-table>', Table::instance());
+    }
+
+    public function testBorder()
+    {
+        self::assertEquals('<el-table :border="true">' . PHP_EOL . '</el-table>', Table::instance()->border());
     }
 
     public function testColumn()
@@ -41,7 +47,7 @@ class TableTest extends TestCase
     public function testSelectionColumn()
     {
         $table = new Table();
-        $table->selection();
+        $table->selectionColumn();
 
         self::assertEquals(
             '<el-table>'
@@ -54,8 +60,8 @@ class TableTest extends TestCase
     public function testIndexColumn()
     {
         $table = new Table();
-        $table->index();
-        $table->index('No');
+        $table->indexColumn();
+        $table->indexColumn('No');
 
         self::assertEquals(
             '<el-table>'
@@ -69,7 +75,7 @@ class TableTest extends TestCase
     public function testExpandColumn()
     {
         $table = new Table();
-        $table->expand();
+        $table->expandColumn();
 
         self::assertEquals(
             '<el-table>'
@@ -82,8 +88,8 @@ class TableTest extends TestCase
     public function testIdColumn()
     {
         $table = new Table();
-        $table->id();
-        $table->id('序号');
+        $table->idColumn();
+        $table->idColumn('序号');
 
         self::assertEquals(
             '<el-table>'
@@ -97,8 +103,8 @@ class TableTest extends TestCase
     public function testNameColumn()
     {
         $table = new Table();
-        $table->name();
-        $table->name('姓名');
+        $table->nameColumn();
+        $table->nameColumn('姓名');
 
         self::assertEquals(
             '<el-table>'
@@ -112,8 +118,8 @@ class TableTest extends TestCase
     public function testCreateTimeColumn()
     {
         $table = new Table();
-        $table->createTime();
-        $table->createTime('成立日期');
+        $table->createTimeColumn();
+        $table->createTimeColumn('成立日期');
 
         self::assertEquals(
             '<el-table>'
@@ -127,8 +133,8 @@ class TableTest extends TestCase
     public function testUpdateTimeColumn()
     {
         $table = new Table();
-        $table->updateTime();
-        $table->updateTime('修改日期');
+        $table->updateTimeColumn();
+        $table->updateTimeColumn('修改日期');
 
         self::assertEquals(
             '<el-table>'
@@ -139,11 +145,47 @@ class TableTest extends TestCase
         );
     }
 
+    public function testActionColumn()
+    {
+        $table = new Table();
+        $table->actionColumn();
+
+        self::assertEquals(
+            '<el-table>'
+            . PHP_EOL . '<el-table-column align="center" class-name="table-column-action" width="240px" label="操作">'
+            . PHP_EOL . '<template slot-scope="scope">'
+            . PHP_EOL . '<el-button size="mini" @click="onItemEditClick(scope.row)" type="success">编辑</el-button>'
+            . PHP_EOL . '<el-button size="mini" @click="onItemViewClick(scope.row)" type="primary">查看</el-button>'
+            . PHP_EOL . '<el-button size="mini" @click="onItemDeleteClick(scope.row)" :loading="statuses[\'delete_\' + scope.row.id]" type="danger">删除</el-button>'
+            . PHP_EOL . '</template>'
+            . PHP_EOL . '</el-table-column>'
+            . PHP_EOL . '</el-table>',
+            $table->build()
+        );
+    }
+
+    public function testTagColumn()
+    {
+        $table = new Table();
+        $table->tagColumn('name', 'Name', 'primary');
+        $table->tagColumn('name', 'Name', ['type' => 'success']);
+        $table->tagColumn('name', 'Name', new Tag(null, 'danger'));
+
+        self::assertEquals(
+            '<el-table>'
+            . PHP_EOL . '<el-table-column prop="name" label="Name" class-name="table-column-tag"><template slot-scope="scope"><el-tag type="primary" size="medium">{{ scope.row.name }}</el-tag></template></el-table-column>'
+            . PHP_EOL . '<el-table-column prop="name" label="Name" class-name="table-column-tag"><template slot-scope="scope"><el-tag type="success" size="medium">{{ scope.row.name }}</el-tag></template></el-table-column>'
+            . PHP_EOL . '<el-table-column prop="name" label="Name" class-name="table-column-tag"><template slot-scope="scope"><el-tag type="danger" size="medium">{{ scope.row.name }}</el-tag></template></el-table-column>'
+            . PHP_EOL . '</el-table>',
+            $table->build()
+        );
+    }
+
     public function testMagicCallColumn()
     {
         $table = new Table();
-        $table->age();
-        $table->sex('性别');
+        $table->ageColumn();
+        $table->sexColumn('性别');
 
         self::assertEquals(
             '<el-table>'
