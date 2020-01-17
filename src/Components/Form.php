@@ -32,6 +32,7 @@ use CodeSinging\Support\Str;
  * @method FormItem checkboxItem(string $prop, string $label, string|Closure|Checkbox $content = null, array $attributes = null)
  * @method FormItem checkboxGroupItem(string $prop, string $label, array|Closure|CheckboxGroup $options = null, array $attributes = null)
  * @method FormItem inputItem(string $prop, string $label, array|Closure|Input $attributes = null)
+ * @method FormItem inputPasswordItem(string $prop, string $label, array|Closure|InputPassword $attributes = null)
  * @method FormItem inputNumberItem(string $prop, string $label, array|Closure|InputNumber $attributes = null)
  * @method FormItem selectItem(string $prop, string $label, array|Closure|Select $options = null, array $attributes = null)
  * @method FormItem cascaderItem(string $prop, string $label, array|Closure|Cascader $options = null, array $attributes = null)
