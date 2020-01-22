@@ -35,7 +35,7 @@ class RadioGroup extends Component
      * If the radio option is Button style.
      * @var bool
      */
-    protected $isButton = false;
+    protected $button = false;
 
     /**
      * RadioGroup constructor.
@@ -70,15 +70,15 @@ class RadioGroup extends Component
     }
 
     /**
-     * Set isButton attribute.
+     * Set button attribute.
      *
-     * @param bool $isButton
+     * @param bool $button
      *
      * @return $this
      */
-    public function isButton(bool $isButton = true)
+    public function button(bool $button = true)
     {
-        $this->isButton = $isButton;
+        $this->button = $button;
         return $this;
     }
 
@@ -139,12 +139,22 @@ class RadioGroup extends Component
     {
         $radios = [];
         if ($this->options) {
-            foreach ($this->options as $option) {
-                if ($this->isButton) {
-                    $radios[] = new RadioButton($option['label'], $option['content'] ?? null, $option['props'] ?? []);
+            foreach ($this->options as $key => $option) {
+                if ($this->button) {
+                    if (is_array($option)) {
+                        $radio = new RadioButton($option['label'], $option['content'] ?? null, $option['props'] ?? []);
+                    } else {
+                        $radio = new RadioButton($key, $option);
+                    }
                 } else {
-                    $radios[] = new Radio(null, $option['label'], $option['content'] ?? null, $option['props'] ?? []);
+                    if (is_array($option)) {
+                        $radio = new Radio(null, $option['label'], $option['content'] ?? null, $option['props'] ?? []);
+                    } else {
+                        $radio = new Radio(null, $key, $option);
+                    }
                 }
+
+                $radios[] = $radio;
             }
         }
         $this->prepend($radios);

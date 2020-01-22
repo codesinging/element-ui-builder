@@ -138,9 +138,7 @@ class Form extends Component
 
         $component->vModel($this->get('model') . '.' . $prop);
 
-        $item = $this->item($prop, $label)->add($component);
-
-        return $item;
+        return $this->item($prop, $label)->add($component);
     }
 
     /**
